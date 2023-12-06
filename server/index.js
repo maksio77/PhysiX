@@ -5,6 +5,7 @@ const cors = require("cors");
 const connection = require("./db");
 const userRotes = require("./routes/users");
 const authRotes = require("./routes/auth");
+const passwordResetRoutes = require("./routes/passwordReset");
 
 // DB connection
 connection();
@@ -16,6 +17,7 @@ app.use(cors());
 // routes
 app.use("/api/users", userRotes);
 app.use("/api/auth", authRotes);
+app.use("/api/password-reset", passwordResetRoutes);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
