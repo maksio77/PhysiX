@@ -8,12 +8,12 @@ module.exports = async (email, subject, text) => {
       port: 465,
       secure: true,
       auth: {
-        user: "maksiopavliv0@gmail.com",
+        user: "physix.app24@gmail.com",
         pass: process.env.PASS,
       },
     });
     await transporter.sendMail({
-      from: "maksiopavliv0@gmail.com",
+      from: "physix.app24@gmail.com",
       to: email,
       subject: subject,
       text: text,
