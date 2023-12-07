@@ -6,6 +6,7 @@ const sendEmail = require('../utils/sendEmail');
 const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
 const bcrypt = require('bcrypt');
+const deleteToken = require('../utils/deleteToken');
 
 router.post('/', async (req, res) => { 
     try {
@@ -28,8 +29,8 @@ router.post('/', async (req, res) => {
             }).save()
         }
             
-        const url = `${process.env.BASE_URL}password-reset/${user._id}/${token.token}`;
-        await sendEmail(user.email, "Password Reset", url);
+        const url = `Hello, please follow the link to reset your password 🔧\n${process.env.BASE_URL}password-reset/${user._id}/${token.token}`;
+        await sendEmail(user.email, "PhysiX\nPassword Reset", url);
 
         res.status(200).send({ message: "password reset link sent to your email account" });
     } catch (error) {
@@ -37,7 +38,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.get("/:/id/:token", async (req, res) => {
+router.get("/:id/:token", async (req, res) => {
     try {
         const user = await User.findOne({ _id: req.params.id });
         if (!user) return res.status(400).send({ message: "Invalid link" });
@@ -80,7 +81,7 @@ router.post("/:id/:token", async (req, res) => {
 
         user.password = hashPassword;
         await user.save();
-        await token.remove();
+        deleteToken(token);
 
         res.status(200).send({ message: "Password reset successfully" });
     } catch (error) {

@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
       token: crypto.randomBytes(32).toString("hex"),
     }).save();
     const url = `Hello, please follow the link to confirm your email 🔧\n${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
-    await sendEmail(user.email, "Verify Email", url);
+    await sendEmail(user.email, "PhysiX\nVerify Email", url);
 
     res
       .status(201)
