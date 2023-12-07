@@ -2,8 +2,9 @@ module.exports = async (token) => {
   setTimeout(async () => {
     try {
       await token.deleteOne({ _id: token._id });
+      console.log("Token deleted");
     } catch (error) {
-      console.error("Delete token error", error);
+      console.log("Delete token error", error);
     }
-  }, 30000);
+  }, 10000);
 };
