@@ -1,6 +1,8 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { MdOutlineEmail } from "react-icons/md";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -36,25 +38,32 @@ const Login = () => {
       <div className='flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl mx-auto p-4 sm:p-8'>
         <div className="justify-center bg-teal-500 rounded-xl flex p-4 sm:p-8 flex-col mb-4 sm:mb-0">
           <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
+            {/*<FaRegUser color='white'/>*/}
             <h1 className='mx-auto text-4xl justify-center flex mb-5 text-white'>Login to Your Account</h1>
-            <input
-              type="text"
-              placeholder="Email"
-              name="email"
-              onChange={handleChange}
-              value={data.email}
-              required
-              className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5'
-            ></input>
-            <input
-              type="password"
-              placeholder="Password"
-              name="password"
-              onChange={handleChange}
-              value={data.password}
-              required
-              className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5'
-            ></input>
+            <div className='flex'>
+              <MdOutlineEmail color='white' size={25} className='flex m-3 mx-auto justify-center'/>
+              <input
+                  type="text"
+                  placeholder="Email"
+                  name="email"
+                  onChange={handleChange}
+                  value={data.email}
+                  required
+                  className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5'
+              ></input>
+            </div>
+            <div className='flex'>
+              <RiLockPasswordLine color='white' size={25} className='flex m-3 mx-auto justify-center'/>
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleChange}
+                value={data.password}
+                required
+                className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5'
+              ></input>
+            </div>
             <Link
               to="/forgot-password"
               style={{
