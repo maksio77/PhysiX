@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import styles from "./styles.module.css";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -19,6 +18,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError('');
     try {
       const url = "http://localhost:4000/api/users";
       const { data: res } = await axios.post(url, data);
@@ -41,19 +41,19 @@ const Signup = () => {
   };
 
   return (
-    <div className={styles.signup_container}>
-      <div className={styles.signup_form_container}>
-        <div className={styles.left}>
-          <h1>Welcome Back</h1>
+    <div className="flex justify-center items-center h-screen">
+      <div className='flex flex-row bg-white border-gray-100 shadow-xl rounded-xl mx-auto'>
+        <div className="justify-center bg-teal-500 rounded-xl flex p-24 flex-col">
+          <h1 className="text-white text-4xl items-center mb-8">Welcome Back</h1>
           <Link to="/login">
-            <button type="button" className={styles.white_btn}>
+            <button type="button" className="flex text-black text-xl bg-white rounded-xl p-2 mx-auto">
               Sign in
             </button>
           </Link>
         </div>
-        <div className={styles.right}>
-          <form className={styles.form_container} onSubmit={handleSubmit}>
-            <h1>Create Account</h1>
+        <div className='p-16'>
+          <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
+            <h1 className='mx-auto text-4xl justify-center flex mb-5'>Create Account</h1>
             <input
               type="text"
               placeholder="First Name"
@@ -61,7 +61,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.firstName}
               required
-              className={styles.input}
+              className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5'
             ></input>
             <input
               type="text"
@@ -70,7 +70,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.lastName}
               required
-              className={styles.input}
+              className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5'
             ></input>
             <input
               type="text"
@@ -79,7 +79,7 @@ const Signup = () => {
               onChange={handleChange}
               value={data.email}
               required
-              className={styles.input}
+              className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5'
             ></input>
             <input
               type="password"
@@ -88,11 +88,11 @@ const Signup = () => {
               onChange={handleChange}
               value={data.password}
               required
-              className={styles.input}
+              className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5'
             ></input>
-            {error && <div className={styles.error_msg}>{error}</div>}
-            {msg && <div className={styles.success_msg}>{msg}</div>}
-            <button type="submit" className={styles.green_btn}>
+            {error && <div className='bg-red-400 mx-auto w-96 rounded-md p-2 mt-1'>{error}</div>}
+            {msg && <div className='bg-green-400 mx-auto rounded-md p-2'>{msg}</div>}
+            <button type="submit" className="text-xl bg-teal-500 text-white rounded-xl p-2 m-3 mx-auto">
               Sign Up
             </button>
           </form>
