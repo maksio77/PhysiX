@@ -32,9 +32,9 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
-      <div className='flex flex-row bg-white mx-auto rounded-xl shadow-xl border-gray-100'>
-        <div className="justify-center bg-teal-500 rounded-xl flex p-24 flex-col">
+    <div className="flex justify-center items-center min-h-screen">
+      <div className='flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl mx-auto p-4 sm:p-8'>
+        <div className="justify-center bg-teal-500 rounded-xl flex p-4 sm:p-8 flex-col mb-4 sm:mb-0">
           <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
             <h1 className='mx-auto text-4xl justify-center flex mb-5 text-white'>Login to Your Account</h1>
             <input
