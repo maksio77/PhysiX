@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const {string} = require("joi");
 const Schema = mongoose.Schema;
 
 const sectionSchema= new Schema ({
@@ -8,7 +9,7 @@ const sectionSchema= new Schema ({
         unique: true
     },
     themes: {
-        type: [{ name: String, info: String}],
+        type: [{ themeName: String, info: [{text: String, formulas: [String] }], }],
         required: true,
     },
 });
