@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './styles.module.css';
 import MathJax from 'react-mathjax';
+import {replaceUnderscores} from "../../utils/repleceUnderscores";
 
 
 const Main = () => {
@@ -9,24 +10,25 @@ const Main = () => {
         window.location.reload();
     };
 
-    const formula = ``;
+    const formula = [""];
+    const text = `
+    `
 
     return (
         <div className={styles.main_container}>
             <nav className={styles.navbar}>
-                <h1>fakebook</h1>
+                <h1 className='text-9xl'>PhysiX</h1>
                 <button className={styles.white_btn} onClick={handleLogout}>
                     Logout
                 </button>
             </nav>
-            <p className='text-3xl'>
+            <p className='text-3xl p-2'>
 
-            </p>
-            <div className='text-3xl'>
                 <MathJax.Provider>
-                    <MathJax.Node inline formula={formula} />
+
+                    {replaceUnderscores(text, formula)}
                 </MathJax.Provider>
-            </div>
+            </p>
         </div>
     );
 }
