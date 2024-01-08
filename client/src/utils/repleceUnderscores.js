@@ -7,7 +7,13 @@ export function replaceUnderscores(text, formulas) {
         return (
             <React.Fragment key={index}>
                 {part}
-                {index !== splitText.length - 1 && <MathJax.Node inline formula={formulas[index]} />}
+                {index !== splitText.length - 1 && (
+                    <>
+                        <br />
+                            <MathJax.Node inline formula={formulas[index]} />
+                        <br />
+                    </>
+                )}
             </React.Fragment>
         );
     });
