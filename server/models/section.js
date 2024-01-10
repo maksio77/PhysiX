@@ -8,6 +8,11 @@ const sectionSchema= new Schema ({
         required: true,
         unique: true
     },
+    routeName: {
+        type: String,
+        required: true,
+        unique: true
+    },
     themes: {
         type: [{ themeName: String, info: [{text: String, formulas: [String] }], }],
         required: true,

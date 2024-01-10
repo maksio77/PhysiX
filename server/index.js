@@ -19,7 +19,6 @@ app.use(cors());
 app.use("/api/users", userRotes);
 app.use("/api/auth", authRotes);
 app.use("/api/password-reset", passwordResetRoutes);
-
 app.use("/api/sections", sectionsRoutes);
 
 const port = process.env.PORT || 4000;
