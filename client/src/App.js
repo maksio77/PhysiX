@@ -5,6 +5,7 @@ import Login from "./components/Login";
 import EmailVerify from "./components/EmailVerify";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
+import Section from "./components/Section";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -12,6 +13,7 @@ function App() {
   return (
     <Routes>
       {user && <Route path="/" exact element={<Main />} />}
+      {user && <Route path="/sections/:section" exact element={<Section />} />}
       <Route path="/signup" exact element={<Signup />} />
       <Route path="/login" exact element={<Login />} />
       <Route path="/" exact element={<Navigate replace to="/login" />} />
