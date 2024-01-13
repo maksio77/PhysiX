@@ -1,20 +1,27 @@
-import React from "react";
-import MathJax from "react-mathjax";
-import { replaceUnderscores } from "../../utils/repleceUnderscores";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const Main = () => {
+  const [sections, setSections] = useState([]);
+
+  useEffect(() => {
+    const getSections = async () => {
+      try {
+        const url = `http://localhost:4000/api/sections`;
+        const { data } = await axios.get(url);
+        setSections(data);
+      } catch (error) {
+        console.log(error);
+        setSections([]);
+      }
+    };
+    getSections();
+  },[]);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
   };
-
-  const formula = [];
-  const text = `
-    `;
-
-  {/* <p className="text-3xl p-2">
-        <MathJax.Provider>{replaceUnderscores(text, formula)}</MathJax.Provider>
-      </p> */}
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
@@ -26,13 +33,11 @@ const Main = () => {
       </nav>
 
       <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-20 mb-8">
-        {/* Блоки */}
-        {[1, 2, 3, 4, 5, 6].map((index) => (
-          <div key={index} className="bg-white rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md">
-            <img src="https://via.placeholder.com/300" alt="Image" className="w-full h-48 object-cover" />
+        {sections.map((section) => (
+          <div key={section._id} className="bg-white rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md flex-grow">
+            {/* <img src="https://via.placeholder.com/300" alt="section" className="w-full h-48 object-cover" /> */}
             <div className="p-4">
-              <h3 className="text-lg font-semibold">Заголовок {index}</h3>
-              <p className="text-gray-600">Текст опису блока</p>
+              <h3 className="text-lg font-semibold">{section.sectionName}</h3>
             </div>
           </div>
         ))}
