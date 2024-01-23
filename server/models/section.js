@@ -14,7 +14,7 @@ const sectionSchema= new Schema ({
         unique: true
     },
     themes: {
-        type: [{ themeName: String, info: [{text: String, formulas: [String] }], }],
+        type: [{ themeName: String, themeRoute: String, info: [{text: String, formulas: [String] }], }],
         required: true,
     },
 });

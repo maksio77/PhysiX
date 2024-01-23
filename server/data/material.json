@@ -6,6 +6,7 @@
     "themes": [
       {
         "themeName": "Основи кінематики.",
+        "themeRoute": "fundamentalsKinematics",
         "info": [
           {"text": "Механічний рух – це зміна положення тіла у просторі з часом.", "formulas": [] },
           {"text": "Під системою відліку розуміють сукупність тіла відліку, відносно якого фіксується зміна положення інших тіл, систему координат, яка позволяє числами виражати положення тіл і годинник для вимірювання часу. Обов’язковим елементом системи координат є одиниця довжини, яка дозволяє відраховувати відстані. В міжнародній системі СІ одиниця довжини – метр (1 м), а одиниця часу – секунда (1 с).", "formulas": [] },
@@ -37,6 +38,7 @@
       },
       {
         "themeName": "Основи динаміки.",
+        "themeRoute": "fundamentalsDynamics",
         "info": [
           {"text": "Перший закон Ньютона – якщо на тіло не діють сили, або сума прикладених сил рівна нулеві, то таке тіло знаходиться в стані спокою, або прямолінійного рівномірного руху ___.", "formulas": ["\\sum_{i} \\vec{F}_i = 0 \\implies \\vec{v} = \\text{const}"] },
           {"text": "Інерційні системи відліку – системи відліку, які знаходяться в стані спокою, або рівномірного прямолінійного руху одна відносно одної.", "formulas": [] },
@@ -66,6 +68,7 @@
       },
       {
         "themeName": "Елементи механіки рідин та газів.",
+        "themeRoute": "elementsMechanicsLiquidsGases",
         "info": [
           {"text": "Тиск – скалярна фізична величина, обумовлена дією сили F на поверхню площею S; ___ одиницю тиску ___ називають паскаль (1 Па).", "formulas": ["p = \\frac{F}{S}", "\\frac{\\text{Н}}{\\text{м}^2}"] },
           {"text": "Закон Паскаля – в рідинах і газах тиск передається у всі сторони одинаково.", "formulas": [] },
@@ -77,6 +80,7 @@
       },
       {
         "themeName": "Закони збереження в механіці. ",
+        "themeRoute": "conservationLawsMechanics",
         "info": [
           {"text": "Імпульс тіла – векторна фізична величина,яка характиризує стан руху тіла, чисельно рівна добутку швидкості на масу тіла ___ . Розмірність імпульсу ___ .", "formulas": ["\\vec{p} = m \\vec{V}", "\\frac{\\text{кг} \\cdot \\text{м}}{\\text{с}}"] },
           {"text": "Закон збереження імпульсу – у замкнутій (ізольованій) системі сума імпульсів тіл за будь-яких взаємодій між ними залишається сталою ___ .", "formulas": ["\\vec{p}_1 + \\vec{p}_2 + \\vec{p}_3 + \\dots + \\vec{p}_n = \\vec{p}'_1 + \\vec{p}'_2 + \\dots + \\vec{p}'_{n'}"] },
@@ -91,7 +95,8 @@
         ]
       },
       {
-        "themeName": "Механічні коливання і хвилі. ",
+        "themeName": "Механічні коливання і хвилі.",
+        "themeRoute": "mechanicalVibrationsWaves.",
         "info": [
           {"text": "Коливальний рух – коли тіло періодично повертається до початкового стану. Характеризується періодом коливань Т, сек; частотою коливань ν, ___≡ Гц (також вживають циклічну частоту ω=2πν), амплітудою.", "formulas": ["{сек}^{-1}"] },
           {"text": "Вільні механічні коливання – коли до тіла не підводять зовні енергію.", "formulas": [] },
@@ -116,19 +121,22 @@
     "routeName": "molecular_thermodynamics",
     "themes": [
       {
-        "themeName": "Основи молекулярно- кінетичної теорії. ",
+        "themeName": "Основи молекулярно - кінетичної теорії. ",
+        "themeRoute": "fundamentalsMolecular-kineticTheory.",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Основи термодинаміки.",
+        "themeRoute": "fundamentalsThermodynamics",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Властивості газів, рідин і твердих тіл.",
+        "themeRoute": "propertiesGasesLiquidsSolids",
         "info": [
           {"text": "", "formulas": [] }
         ]
@@ -142,24 +150,28 @@
     "themes": [
       {
         "themeName": "Основи електростатики.",
+        "themeRoute": "basicsElectrostatics",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Закони постійного струму.",
+        "themeRoute": "lawsDirectCurrent",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Електричний струм у різних середовищах.",
+        "themeRoute": "electricCurrentDifferentEnvironments",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Магнітне поле, електромагнітна індукція. Взаємодія",
+        "themeRoute": "magneticField",
         "info": [
           {"text": "", "formulas": [] }
         ]
@@ -173,12 +185,14 @@
     "themes": [
       {
         "themeName": "Електромагнітні коливання і хвилі.",
+        "themeRoute": "electromagneticVibrationsWaves",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Оптика.",
+        "themeRoute": "optics",
         "info": [
           {"text": "", "formulas": [] }
         ]
@@ -192,24 +206,21 @@
     "themes": [
       {
         "themeName": "Елементи теорії відносності.",
+        "themeRoute": "elementsTheoryRelativity",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Світлові кванти. ",
+        "themeRoute": "lightQuanta",
         "info": [
           {"text": "", "formulas": [] }
         ]
       },
       {
         "themeName": "Атом та атомне ядро.",
-        "info": [
-          {"text": "", "formulas": [] }
-        ]
-      },
-      {
-        "themeName": "Магнітне поле, електромагнітна індукція. Взаємодія",
+        "themeRoute": "atomicNucleus",
         "info": [
           {"text": "", "formulas": [] }
         ]
