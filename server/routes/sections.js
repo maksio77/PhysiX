@@ -10,14 +10,20 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:sectionName', async (req, res) => {
+router.get('/:sectionName/:themeName?', async (req, res) => {
     try {
-        const themes = await Section.findOne({ routeName: req.params.sectionName}, 'themes');
-        if (!themes) return res.status(400).send({ message: "Invalid link" });
-        
-        res.json(themes);
+      const section = await Section.findOne({ routeName: req.params.sectionName });
+      if (!section) {
+        return res.status(400).send({ message: "Invalid link" });
+      }
+
+      const themes = req.params.themeName
+        ? section.themes.filter((theme) => theme.themeRoute === req.params.themeName)
+        : section.themes;
+
+      res.json(themes);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+      res.status(500).json({ message: error.message });
     }
 });
 
