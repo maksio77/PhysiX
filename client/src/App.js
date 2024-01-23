@@ -6,21 +6,25 @@ import EmailVerify from "./components/EmailVerify";
 import ForgotPassword from "./components/ForgotPassword";
 import PasswordReset from "./components/PasswordReset";
 import Section from "./components/Section";
+import Header from "./components/Header";
 
 function App() {
   const user = localStorage.getItem("token");
 
   return (
-    <Routes>
-      {user && <Route path="/" exact element={<Main />} />}
-      {user && <Route path="/sections/:section" exact element={<Section />} />}
-      <Route path="/signup" exact element={<Signup />} />
-      <Route path="/login" exact element={<Login />} />
-      <Route path="/" exact element={<Navigate replace to="/login" />} />
-      <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/password-reset/:id/:token" element={<PasswordReset/> } />
-    </Routes>
+    <>
+      <Header/>
+      <Routes>
+        {user && <Route path="/" exact element={<Main />} />}
+        {user && <Route path="/sections/:section" exact element={<Section />} />}
+        <Route path="/signup" exact element={<Signup />} />
+        <Route path="/login" exact element={<Login />} />
+        <Route path="/" exact element={<Navigate replace to="/login" />} />
+        <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/password-reset/:id/:token" element={<PasswordReset/> } />
+      </Routes>
+    </>
   );
 }
 
