@@ -12,7 +12,7 @@ const Section = () => {
             const url = `http://localhost:4000/api/sections/${param.section}`;
             const { data } = await axios.get(url);
             setThemes(data.themes);
-        } catch (error) {
+        } catch (error) {   
             console.log(error);
             setThemes([]);
         }
