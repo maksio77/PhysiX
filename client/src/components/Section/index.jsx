@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 
 const Section = () => {
@@ -7,7 +7,7 @@ const Section = () => {
     const param = useParams();
 
     useEffect(() => {
-        const getSections = async () => {
+        const getSection = async () => {
         try {
             const url = `http://localhost:4000/api/sections/${param.section}`;
             const { data } = await axios.get(url);
@@ -17,7 +17,7 @@ const Section = () => {
             setThemes([]);
         }
         };
-        getSections();
+        getSection();
     },[param.section]);
     
     return (
@@ -27,8 +27,18 @@ const Section = () => {
                     <div key={theme._id} className="bg-white rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md flex-grow">
                         {/* <img src="https://via.placeholder.com/300" alt="section" className="w-full h-48 object-cover" /> */}
                         <div className="p-4">
-                            <h3 className="text-lg font-semibold">{theme.themeName}</h3>
+                            <Link
+                                to={`/sections/${param.section}/${theme.themeRoute}`}
+                                style={{
+                                alignSelf: "flex-start",
+                                textDecoration: "none",
+                                }}
+                                className='sm: ml-10'
+                            >
+                                <h3 className="text-lg font-semibold">{theme.themeName}</h3>
+                            </Link>
                         </div>
+                        
                     </div>
                 ))}
             </div>
