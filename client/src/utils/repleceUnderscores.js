@@ -1,24 +1,18 @@
 import React from "react";
-import MathJax from "react-mathjax";
+import { MathJaxContext, MathJax } from "better-react-mathjax";
 
 export function replaceUnderscores(text, formulas) {
-    const splitText = text.split('___');
-    const replacedText = splitText.map((part, index) => {
-        return (
-            <React.Fragment key={index}>
-                {part}
-                {index !== splitText.length - 1 && (
-                    <MathJax.Node inline formula={formulas[index]} />
-                )}
-            </React.Fragment>
-        );
-    });
-
+  const splitText = text.split("___");
+  return splitText.map((part, index) => {
     return (
-        <MathJax.Provider>
-            <div>
-                {replacedText}
-            </div>
-        </MathJax.Provider>
+      <React.Fragment key={index}>
+        <MathJaxContext>
+          <h2>{part}</h2>
+          {index !== splitText.length - 1 && (
+            <MathJax>{`\\(${formulas[index]}\\)`}</MathJax>
+          )}
+        </MathJaxContext>
+      </React.Fragment>
     );
-};
+  });
+}
