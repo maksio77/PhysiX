@@ -4,12 +4,13 @@ import { MathJaxContext, MathJax } from "better-react-mathjax";
 export function replaceUnderscores(text, formulas) {
   const splitText = text.split("___");
   return splitText.map((part, index) => {
+    const formula = `\\(${formulas[index]}\\)`;
     return (
       <React.Fragment key={index}>
         <MathJaxContext>
           {part}
           {index !== splitText.length - 1 && (
-            <MathJax>{`\\(${formulas[index]}\\)`}</MathJax>
+            <MathJax style={{display: "inline"}}>{formula}</MathJax>
           )}
         </MathJaxContext>
       </React.Fragment>
