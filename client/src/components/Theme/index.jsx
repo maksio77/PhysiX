@@ -4,7 +4,8 @@ import axios from "axios";
 import { replaceUnderscores } from "../../utils/repleceUnderscores";
 
 const Theme = () => {
-    const [theme, setTheme] = useState([]);
+    const [themeName, setThemeName] = useState('');
+    const [article, setArticle] = useState([]);
     const param = useParams();
 
     useEffect(() => {
@@ -12,10 +13,11 @@ const Theme = () => {
         try {
             const url = `http://localhost:4000/api/sections/${param.section}/${param.theme}`;
             const { data } = await axios.get(url);
-            setTheme(data[0].info);
+            setArticle(data[0].info);
+            setThemeName(data[0].themeName)
         } catch (error) {   
             console.log(error);
-            setTheme([]);
+            setArticle([]);
         }
         };
         getTheme();
@@ -23,15 +25,16 @@ const Theme = () => {
 
     return (
         <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto mt-28 mb-8">
-            {theme.map((item) => (
-              <div key={item._id} className="bg-white rounded-lg overflow-hidden shadow-md">
-                <div className="p-8">
-                  <h3 className="text-xl">{replaceUnderscores(item.text, item.formulas)}</h3>
+            <h2 className="text-4xl font-semibold mx-auto mt-28">{themeName}</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 max-w-screen-xl mx-auto mt-20 mb-8"> 
+                {article.map((item) => (
+                <div key={item._id} className="bg-white rounded-lg overflow-hidden shadow-md">
+                    <div className="p-8">
+                    <h3 className="text-xl">{replaceUnderscores(item.text, item.formulas)}</h3>
+                    </div>
                 </div>
-              </div>
-            ))}
-          </div>
+                ))}
+            </div>
         </div>
     );
 
