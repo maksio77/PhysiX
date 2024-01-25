@@ -28,6 +28,7 @@ const Main = () => {
             <div className="p-4">
               <Link
                 to={`/sections/${section.routeName}`}
+                state={{ section: section }}
                 style={{
                   alignSelf: "flex-start",
                   textDecoration: "none",
