@@ -13,6 +13,15 @@ const sectionSchema= new Schema ({
         required: true,
         unique: true
     },
+    img: {
+        type: String,
+        required: true,
+    },
+    img_alt: {
+        type: String,
+        required: true,
+        unique: true
+    },
     themes: {
         type: [{ themeName: String, themeRoute: String, info: [{text: String, formulas: [String] }], }],
         required: true,

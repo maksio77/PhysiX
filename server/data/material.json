@@ -3,6 +3,8 @@
     "id": 0,
     "sectionName": "Механіка",
     "routeName": "mechanics",
+    "img": "https://cdn.pixabay.com/photo/2016/06/12/20/26/macro-1452986_1280.jpg",
+    "img_alt": "mechanics",
     "themes": [
       {
         "themeName": "Основи кінематики.",
@@ -119,6 +121,8 @@
     "id":  1,
     "sectionName": "Молекулярна фізика і термодинаміка",
     "routeName": "molecular_thermodynamics",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Stylised_atom_with_three_Bohr_model_orbits_and_stylised_nucleus.svg/1200px-Stylised_atom_with_three_Bohr_model_orbits_and_stylised_nucleus.svg.png",
+    "img_alt": "molecular thermodynamics",
     "themes": [
       {
         "themeName": "Основи молекулярно - кінетичної теорії. ",
@@ -147,6 +151,8 @@
     "id":  2,
     "sectionName": "Електродинаміка",
     "routeName": "electrodynamics",
+    "img": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/VFPt_Solenoid_correct2.svg/2560px-VFPt_Solenoid_correct2.svg.png",
+    "img_alt": "electrodynamics",
     "themes": [
       {
         "themeName": "Основи електростатики.",
@@ -182,6 +188,8 @@
     "id":  3,
     "sectionName": "Електромагнітні коливання і хвилі. Оптика",
     "routeName": "electromagnetic_optics",
+    "img": "https://disted.edu.vn.ua/media/images/konstantin22/9/img572.jpg",
+    "img_alt": "electromagnetic_optics",
     "themes": [
       {
         "themeName": "Електромагнітні коливання і хвилі.",
@@ -203,6 +211,8 @@
     "id":  4,
     "sectionName": "Квантова фізика. Елементи теорії відносності.",
     "routeName": "quantum_physics",
+    "img": "https://portaltele.com.ua/wp-content/uploads/2017/08/quant-net.jpg",
+    "img_alt": "quantum_physics",
     "themes": [
       {
         "themeName": "Елементи теорії відносності.",
