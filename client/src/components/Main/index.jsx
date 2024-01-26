@@ -38,7 +38,7 @@ const Main = () => {
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-secondary">
-      <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-20 mb-8">
+      <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-28 mb-8">
         {sections.map((section) => (
           <div
             key={section._id}
