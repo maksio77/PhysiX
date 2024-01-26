@@ -6,13 +6,13 @@ const Theme = () => {
   const {section ,info, themeName} = useLocation().state;
 
   return (
-    <div className="flex flex-col justify-center bg-gray-100">
-        <h2 className="text-4xl font-semibold mx-auto mt-28">{themeName}</h2>
+    <div className="min-h-screen flex flex-col justify-center bg-secondary">
+        <h2 className="text-4xl font-semibold mx-auto mt-28 text-primary">{themeName}</h2>
         <div className="flex flex-col items-start max-w-screen-xl mx-auto">
             <Link
                 to={`/sections/${param.section}`}
                 state={{section: section}}
-                className="mt-4 bg-white p-2 rounded-md text-left self-start"
+                className="mt-4 bg-primary text-white p-2 rounded-md text-left self-start"
             >
                 Назад
             </Link>

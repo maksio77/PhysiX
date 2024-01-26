@@ -5,12 +5,12 @@ const Section = () => {
   const { section } = useLocation().state;
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-100">
-      <h2 className="text-4xl font-semibold mx-auto mt-28">{section.sectionName}</h2>
+    <div className="min-h-screen flex flex-col justify-center items-center bg-secondary">
+      <h2 className="text-4xl font-semibold mx-auto mt-28 text-primary">{section.sectionName}</h2>
       <div className="flex flex-col items-start max-w-screen-xl mx-auto w-full">
         <Link
           to={`/`}
-          className="mt-4 bg-white p-2 rounded-md text-left self-start"
+          className="mt-4 bg-primary text-white p-2 rounded-md text-left"
         >
           Назад
         </Link>

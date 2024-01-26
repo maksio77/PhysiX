@@ -35,10 +35,10 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen flex-col sm: w-auto">
+    <div className="flex justify-center items-center min-h-screen flex-col sm: w-auto bg-secondary">
       <img src={logo} alt={'LOGO'} className='scale-50 p-0'/>
       <div className='flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl p-4 sm:p-14'>
-        <div className="justify-center bg-teal-500 rounded-xl flex p-4 flex-col mb-4 w-full sm:w-auto">
+        <div className="justify-center bg-primary rounded-xl flex p-4 flex-col mb-4 w-full sm:w-auto">
           <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
             {/*<FaRegUser color='white'/>*/}
             <h1 className='mx-auto text-4xl justify-center flex mb-5 text-white sm: text-2xl'>Login to Your
@@ -52,7 +52,7 @@ const Login = () => {
                   onChange={handleChange}
                   value={data.email}
                   required
-                  className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5 sm: w-64'
+                  className='bg-secondary outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5 sm: w-64'
               ></input>
             </div>
             <div className='flex sm: ml-10'>
@@ -64,7 +64,7 @@ const Login = () => {
                   onChange={handleChange}
                   value={data.password}
                   required
-                  className='bg-gray-100 outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5 sm: w-64 mx-auto'
+                  className='bg-secondary outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5 sm: w-64 mx-auto'
               ></input>
             </div>
             <Link
@@ -87,7 +87,7 @@ const Login = () => {
         <div className='flex flex-col mx-auto justify-center p-20'>
           <h1 className='mx-auto text-4xl justify-center flex mb-5'>New Here?</h1>
           <Link to="/signup">
-            <button type="button" className="text-xl bg-teal-500 text-white rounded-xl p-2 m-3 mx-auto flex">
+            <button type="button" className="text-xl bg-primary text-white rounded-xl p-2 m-3 mx-auto flex">
               Sign Up
             </button>
           </Link>
