@@ -8,6 +8,7 @@ import PasswordReset from "./components/PasswordReset";
 import Section from "./components/Section";
 import Header from "./components/Header";
 import Theme from "./components/Theme";
+import Page404 from "./components/404";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -25,6 +26,7 @@ function App() {
         <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/password-reset/:id/:token" element={<PasswordReset/> } />
+        <Route path="*" element={<Page404/>}/>
       </Routes>
     </>
   );
