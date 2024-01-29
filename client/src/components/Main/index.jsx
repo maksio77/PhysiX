@@ -9,8 +9,15 @@ const Main = () => {
   const [sections, setSections] = useState([]);
 
   useEffect(() => {
-    getAllSections()
-      .then((res) => setSections(res));
+    let storedSections = localStorage.getItem('sections');
+    if (storedSections) {
+      setSections(JSON.parse(storedSections));
+    } else {
+      getAllSections().then((res) => {
+        setSections(res);
+        localStorage.setItem('sections', JSON.stringify(res));
+      });
+    } 
   }, []);
 
   const content = sections.length !== 0 ? (
