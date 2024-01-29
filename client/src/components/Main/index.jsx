@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import RingLoader from "react-spinners/ClipLoader";
+import { MdClear } from "react-icons/md";
 import usePhysixService from "../../services/PhysixService";
 import ErrorMessage from "../ErrorMessage";
 
@@ -8,6 +9,7 @@ const Main = () => {
   const { loading, error, getAllSections } = usePhysixService();
   const [sections, setSections] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
+  const [inputText, setInputText] = useState("");
 
   useEffect(() => {
     let storedSections = localStorage.getItem("sections");
@@ -23,19 +25,14 @@ const Main = () => {
 
   const searchText = (text) => {
     let results = [];
-    if (text.length > 2) {
+    if (text.trim().length > 2) {
       const lowerCaseText = text.toLowerCase();
       sections.forEach((section) => {
         section.themes.forEach((theme) => {
           theme.info.forEach((info) => {
-            const words = info.text.toLowerCase().split(" ");
-            const matchedWords = words.filter((word) =>
-              word.startsWith(lowerCaseText)
-            );
-            if (matchedWords.length > 0) {
-              const startIndex = info.text
-                .toLowerCase()
-                .indexOf(matchedWords[0]);
+            const contentLowercase = info.text.toLowerCase();
+            if (contentLowercase.includes(lowerCaseText)) {
+              const startIndex = contentLowercase.indexOf(lowerCaseText);
               const matchingText = info.text.substring(
                 startIndex,
                 startIndex + 35
@@ -58,19 +55,34 @@ const Main = () => {
   };
 
   const handleSearchChange = (e) => {
+    setInputText(e.target.value);
     setSearchResults(searchText(e.target.value));
+  };
+
+  const handleResetSearch = () => {
+    setInputText("");
+    setSearchResults([]);
   };
 
   const content =
     sections.length !== 0 ? (
       <>
         <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-28 mb-4 relative w-full">
-          <input
-            onChange={handleSearchChange}
-            type="text"
-            placeholder="Введіть ключове слово"
-            className="w-full mt-4 p-2 border border-secondary rounded-md focus:outline-none focus:border-primary"
-          />
+          <div className="flex w-full">
+            <input
+              value={inputText}
+              onChange={handleSearchChange}
+              type="text"
+              placeholder="Введіть ключове слово"
+              className="w-full p-2 border border-secondary rounded-md focus:outline-none focus:border-primary"
+            />
+            <button
+              onClick={handleResetSearch}
+              className="ml-2 p-2 border border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary"
+            >
+              <MdClear size={25} />
+            </button>
+          </div>
 
           {searchResults.length > 0 && (
             <ul className="absolute max-w-screen-xl mx-auto top-full left-0 bg-white mt-2 border border-secondary rounded-md py-2 px-4 shadow-md overflow-auto max-h-48 w-full z-10">
