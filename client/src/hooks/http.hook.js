@@ -1,19 +1,23 @@
 import { useState, useCallback } from "react";
-import axios from "axios";
 
 export const useHttp = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  const request = useCallback( async () => {
+  const clearError = useCallback(() => setError(null), []);
+
+  const request = useCallback( async (method = 'GET', body = null, headers = {'Content-Type': 'application/json'}) => {
     setLoading(true);
     try {
       const url = `http://localhost:4000/api/sections`;
-      const { data } = await axios.get(url);
+      const response = (await fetch(url, {method,body,headers}));
 
-      if(!data.ok){
-        throw new Error(`Could not fetch ${url}, status: ${data.status}`);
+      if(!response.ok){
+        throw new Error(`Could not fetch ${url}, status: ${response.status}`);
       }
+      
+      clearError();
+      const data = await response.json();
 
       setLoading(false);
       return data;
@@ -23,8 +27,6 @@ export const useHttp = () => {
       throw error;
     }
   },[]);
-
-  const clearError = useCallback(() => setError(null), []);
 
   return { loading, request, error, clearError };
 };
