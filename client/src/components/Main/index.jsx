@@ -7,51 +7,125 @@ import ErrorMessage from "../ErrorMessage";
 const Main = () => {
   const { loading, error, getAllSections } = usePhysixService();
   const [sections, setSections] = useState([]);
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    let storedSections = localStorage.getItem('sections');
+    let storedSections = localStorage.getItem("sections");
     if (storedSections) {
       setSections(JSON.parse(storedSections));
     } else {
       getAllSections().then((res) => {
         setSections(res);
-        localStorage.setItem('sections', JSON.stringify(res));
+        localStorage.setItem("sections", JSON.stringify(res));
       });
-    } 
+    }
   }, []);
 
-  const content = sections.length !== 0 ? (
-    <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-28 mb-8">
-      {sections.map((section) => (
-        <div
-          key={section._id}
-          className="bg-white rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md flex-grow"
-        >
-          <img
-            src={section.img}
-            alt={section.img_alt}
-            className="w-full h-48 object-cover"
+  const searchText = (text) => {
+    let results = [];
+    if (text.length > 2) {
+      const lowerCaseText = text.toLowerCase();
+      sections.forEach((section) => {
+        section.themes.forEach((theme) => {
+          theme.info.forEach((info) => {
+            const words = info.text.toLowerCase().split(" ");
+            const matchedWords = words.filter((word) =>
+              word.startsWith(lowerCaseText)
+            );
+            if (matchedWords.length > 0) {
+              const startIndex = info.text
+                .toLowerCase()
+                .indexOf(matchedWords[0]);
+              const matchingText = info.text.substring(
+                startIndex,
+                startIndex + 35
+              );
+              results.push({
+                text: `${section.sectionName} > ${theme.themeName} > "${matchingText}..."`,
+                route: `sections/${section.routeName}/${theme.themeRoute}`,
+                state: {
+                  themeName: theme.themeName,
+                  info: theme.info,
+                  section,
+                },
+              });
+            }
+          });
+        });
+      });
+    }
+    return results;
+  };
+
+  const handleSearchChange = (e) => {
+    setSearchResults(searchText(e.target.value));
+  };
+
+  const content =
+    sections.length !== 0 ? (
+      <>
+        <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-28 mb-4 relative w-full">
+          <input
+            onChange={handleSearchChange}
+            type="text"
+            placeholder="Введіть ключове слово"
+            className="w-full mt-4 p-2 border border-secondary rounded-md focus:outline-none focus:border-primary"
           />
-          <div className="p-4">
-            <Link
-              to={`/sections/${section.routeName}`}
-              state={{ section: section }}
-              style={{
-                alignSelf: "flex-start",
-                textDecoration: "none",
-              }}
-              className="sm: ml-10"
-            >
-              <h3 className="text-lg font-semibold">{section.sectionName}</h3>
-            </Link>
-          </div>
+
+          {searchResults.length > 0 && (
+            <ul className="absolute max-w-screen-xl mx-auto top-full left-0 bg-white mt-2 border border-secondary rounded-md py-2 px-4 shadow-md overflow-auto max-h-48 w-full z-10">
+              {searchResults.map((result, index) => (
+                <li
+                  key={index}
+                  className="mb-1 border p-2 border-secondary w-full rounded-xl"
+                >
+                  <Link
+                    to={result.route}
+                    state={result.state}
+                    className="block text-black hover:text-primary w-full"
+                  >
+                    {result.text}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      ))}
-    </div>
-  ) : null;
+
+        <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-4 mb-8 relative w-full z-0">
+          {sections.map((section) => (
+            <div
+              key={section._id}
+              className="bg-white rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md flex-grow"
+            >
+              <img
+                src={section.img}
+                alt={section.img_alt}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-4">
+                <Link
+                  to={`/sections/${section.routeName}`}
+                  state={{ section: section }}
+                  style={{
+                    alignSelf: "flex-start",
+                    textDecoration: "none",
+                  }}
+                  className="sm: ml-10"
+                >
+                  <h3 className="text-lg font-semibold hover:text-primary w-full">
+                    {section.sectionName}
+                  </h3>
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </>
+    ) : null;
 
   const errorMessage = error ? <ErrorMessage message={error} /> : null;
-  
+
   const spinner = loading ? (
     <RingLoader
       color={"black"}

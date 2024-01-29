@@ -30,7 +30,7 @@ const Section = () => {
                   }}
                   className="sm: ml-10"
                 >
-                  <h3 className="text-lg font-semibold">{theme.themeName}</h3>
+                  <h3 className="text-lg font-semibold hover:text-primary w-full">{theme.themeName}</h3>
                 </Link>
               </div>
             </div>
