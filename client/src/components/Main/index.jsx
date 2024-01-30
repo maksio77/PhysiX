@@ -1,28 +1,17 @@
-import { useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import RingLoader from "react-spinners/ClipLoader";
 import { MdClear } from "react-icons/md";
 import usePhysixService from "../../services/PhysixService";
 import ErrorMessage from "../ErrorMessage";
 import { searchInputText } from "../../utils/searchInputText";
+import { SectionContext } from "../SectionContext";
 
 const Main = () => {
-  const { loading, error, getAllSections } = usePhysixService();
-  const [sections, setSections] = useState([]);
+  const sections = useContext(SectionContext);
+  const { loading, error } = usePhysixService();
   const [searchResults, setSearchResults] = useState([]);
   const [inputText, setInputText] = useState("");
-
-  useEffect(() => {
-    let storedSections = localStorage.getItem("sections");
-    if (storedSections) {
-      setSections(JSON.parse(storedSections));
-    } else {
-      getAllSections().then((res) => {
-        setSections(res);
-        localStorage.setItem("sections", JSON.stringify(res));
-      });
-    }
-  }, []);
 
   const handleSearchChange = (e) => {
     setInputText(e.target.value);
