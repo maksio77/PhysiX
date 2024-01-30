@@ -16,9 +16,6 @@ export const searchInputText = (sections, text) => {
               text: `${section.sectionName} > ${theme.themeName} > "${matchingText}..."`,
               route: `sections/${section.routeName}/${theme.themeRoute}`,
               state: {
-                themeName: theme.themeName,
-                info: theme.info,
-                section,
                 searchPhrase: matchingText,
               },
             });

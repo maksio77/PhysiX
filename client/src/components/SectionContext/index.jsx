@@ -4,7 +4,7 @@ export const SectionContext = createContext();
 
 const SectionProvider = (props) => {
   const [sections, setSections] = useState([]);
-  const { getAllSections } = usePhysixService();
+  const { getAllSections, loading, error } = usePhysixService();
 
   useEffect(() => {
     let storedSections = localStorage.getItem("sections");
@@ -19,7 +19,7 @@ const SectionProvider = (props) => {
   }, []);
 
   return (
-    <SectionContext.Provider value={sections}>
+    <SectionContext.Provider value={{sections, error, loading}}>
       {props.children}
     </SectionContext.Provider>
   );

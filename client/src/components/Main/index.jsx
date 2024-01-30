@@ -1,15 +1,13 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import RingLoader from "react-spinners/ClipLoader";
 import { MdClear } from "react-icons/md";
-import usePhysixService from "../../services/PhysixService";
 import ErrorMessage from "../ErrorMessage";
+import Spinner from "../Spinner";
 import { searchInputText } from "../../utils/searchInputText";
 import { SectionContext } from "../SectionContext";
 
 const Main = () => {
-  const sections = useContext(SectionContext);
-  const { loading, error } = usePhysixService();
+  const {sections, error, loading} = useContext(SectionContext);
   const [searchResults, setSearchResults] = useState([]);
   const [inputText, setInputText] = useState("");
 
@@ -77,7 +75,6 @@ const Main = () => {
               <div className="p-4">
                 <Link
                   to={`/sections/${section.routeName}`}
-                  state={{ section: section }}
                   style={{
                     alignSelf: "flex-start",
                     textDecoration: "none",
@@ -96,16 +93,7 @@ const Main = () => {
     ) : null;
 
   const errorMessage = error ? <ErrorMessage message={error} /> : null;
-
-  const spinner = loading ? (
-    <RingLoader
-      color={"black"}
-      loading={loading}
-      size={100}
-      aria-label="Loading Spinner"
-      data-testid="loader"
-    />
-  ) : null;
+  const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
     <div className="min-h-screen flex flex-col justify-center items-center bg-secondary">
