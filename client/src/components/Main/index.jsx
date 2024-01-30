@@ -4,6 +4,7 @@ import RingLoader from "react-spinners/ClipLoader";
 import { MdClear } from "react-icons/md";
 import usePhysixService from "../../services/PhysixService";
 import ErrorMessage from "../ErrorMessage";
+import { searchInputText } from "../../utils/searchInputText";
 
 const Main = () => {
   const { loading, error, getAllSections } = usePhysixService();
@@ -23,40 +24,9 @@ const Main = () => {
     }
   }, []);
 
-  const searchText = (text) => {
-    let results = [];
-    if (text.trim().length > 2) {
-      const lowerCaseText = text.toLowerCase();
-      sections.forEach((section) => {
-        section.themes.forEach((theme) => {
-          theme.info.forEach((info) => {
-            const contentLowercase = info.text.toLowerCase();
-            if (contentLowercase.includes(lowerCaseText)) {
-              const startIndex = contentLowercase.indexOf(lowerCaseText);
-              const matchingText = info.text.substring(
-                startIndex,
-                startIndex + 35
-              );
-              results.push({
-                text: `${section.sectionName} > ${theme.themeName} > "${matchingText}..."`,
-                route: `sections/${section.routeName}/${theme.themeRoute}`,
-                state: {
-                  themeName: theme.themeName,
-                  info: theme.info,
-                  section,
-                },
-              });
-            }
-          });
-        });
-      });
-    }
-    return results;
-  };
-
   const handleSearchChange = (e) => {
     setInputText(e.target.value);
-    setSearchResults(searchText(e.target.value));
+    setSearchResults(searchInputText(sections, e.target.value));
   };
 
   const handleResetSearch = () => {
@@ -80,7 +50,7 @@ const Main = () => {
               onClick={handleResetSearch}
               className="ml-2 p-2 border border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary"
             >
-              <MdClear size={25} />
+              <MdClear/>
             </button>
           </div>
 
@@ -113,7 +83,7 @@ const Main = () => {
               <img
                 src={section.img}
                 alt={section.img_alt}
-                className="w-full h-48 object-cover"
+                className="w-full lg:h-48 object-cover"
               />
               <div className="p-4">
                 <Link
@@ -125,7 +95,7 @@ const Main = () => {
                   }}
                   className="sm: ml-10"
                 >
-                  <h3 className="text-lg font-semibold hover:text-primary w-full">
+                  <h3 className="lg:text-lg sm: text-m font-semibold hover:text-primary w-full">
                     {section.sectionName}
                   </h3>
                 </Link>

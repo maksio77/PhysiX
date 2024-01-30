@@ -10,7 +10,7 @@ export function replaceUnderscores(text, formulas) {
         <MathJaxContext>
           {part}
           {index !== splitText.length - 1 && (
-            <MathJax style={{display: "inline", fontSize: "20px"}}>{formula}</MathJax>
+            <MathJax style={{display: "inline", fontSize: "17px"}}>{formula}</MathJax>
           )}
         </MathJaxContext>
       </React.Fragment>
