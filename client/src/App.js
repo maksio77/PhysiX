@@ -9,25 +9,33 @@ import PasswordReset from "./components/PasswordReset";
 import Header from "./components/Header";
 import Theme from "./components/Theme";
 import Page404 from "./components/404";
+import ErorrBoundary from "./components/ErorrBoundary";
 
 function App() {
   const user = localStorage.getItem("token");
 
   return (
     <>
-      <Header/>
-      <Routes>
-        {user && <Route path="/" exact element={<Main />} />}
-        {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
-        {user && <Route path="/sections/:section/:theme" exact element={<Theme />} />}
-        <Route path="/signup" exact element={<Signup />} />
-        <Route path="/login" exact element={<Login />} />
-        <Route path="/" exact element={<Navigate replace to="/login" />} />
-        <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
-        <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/password-reset/:id/:token" element={<PasswordReset/> } />
-        <Route path="*" element={<Page404/>}/>
-      </Routes>
+      <ErorrBoundary>
+        {user && <Header />}
+        <Routes>
+          {user && <Route path="/" exact element={<Main />} />}
+          {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
+          {user && (
+            <Route path="/sections/:section/:theme" exact element={<Theme />} />
+          )}
+          <Route path="/signup" exact element={<Signup />} />
+          <Route path="/login" exact element={<Login />} />
+          <Route path="/" exact element={<Navigate replace to="/login" />} />
+          <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route
+            path="/password-reset/:id/:token"
+            element={<PasswordReset />}
+          />
+          <Route path="*" element={<Page404 />} />
+        </Routes>
+      </ErorrBoundary>
     </>
   );
 }
