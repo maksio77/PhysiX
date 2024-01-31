@@ -7,9 +7,24 @@ import { searchInputText } from "../../utils/searchInputText";
 import { SectionContext } from "../SectionContext";
 
 const Main = () => {
-  const {sections, error, loading} = useContext(SectionContext);
+  const { sections, error, loading } = useContext(SectionContext);
+
   const [searchResults, setSearchResults] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [themes, setThemes] = useState({});
+  const [openTheme, setOpenTheme] = useState("");
+
+  const findThemesByRouteName = (routeName, array) => {
+    if (openTheme === routeName) {
+      setOpenTheme("");
+      setThemes([]);
+      return;
+    }
+
+    const res = array.find((object) => object.routeName === routeName);
+    setThemes(res?.themes || []);
+    setOpenTheme(routeName);
+  };
 
   const handleSearchChange = (e) => {
     setInputText(e.target.value);
@@ -37,7 +52,7 @@ const Main = () => {
               onClick={handleResetSearch}
               className="ml-2 p-2 border border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary"
             >
-              <MdClear/>
+              <MdClear />
             </button>
           </div>
 
@@ -65,26 +80,50 @@ const Main = () => {
           {sections.map((section) => (
             <div
               key={section._id}
-              className="bg-white rounded-lg overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md flex-grow"
+              className="bg-white rounded-xl overflow-hidden w-full sm:w-1/2 md:w-1/3 lg:w-1/4 mb-4 shadow-md flex-grow"
             >
-              <img
-                src={section.img}
-                alt={section.img_alt}
-                className="w-full lg:h-48 object-cover"
-              />
-              <div className="p-4">
-                <Link
-                  to={`/sections/${section.routeName}`}
-                  style={{
-                    alignSelf: "flex-start",
-                    textDecoration: "none",
-                  }}
-                  className="sm: ml-10"
-                >
-                  <h3 className="lg:text-lg sm: text-m font-semibold hover:text-primary w-full">
-                    {section.sectionName}
+              <div className="relative">
+                <img
+                  src={section.img}
+                  alt={section.img_alt}
+                  className="w-full h-48 object-cover"
+                />
+                <div className="p-4">
+                  <h3 className="lg:text-lg sm:text-m font-semibold hover:text-primary w-full">
+                    <button
+                      onClick={() =>
+                        findThemesByRouteName(section.routeName, sections)
+                      }
+                    >
+                      {section.sectionName}
+                    </button>
                   </h3>
-                </Link>
+                </div>
+                {openTheme === section.routeName && themes.length > 0 && (
+                  <div className="absolute right-0 top-16 bg-white border border-secondary rounded-xl p-2 shadow-md overflow-auto max-h-48 w-72 z-50">
+                    <ul className="dropdown-content">
+                      {themes.map((theme, index) => (
+                        <li
+                          key={index}
+                          className="mb-1 border p-2 border-secondary rounded-xl"
+                        >
+                          <Link
+                            to={`/sections/${section.routeName}/${theme.themeRoute}`}
+                            style={{
+                              alignSelf: "flex-start",
+                              textDecoration: "none",
+                            }}
+                            className="sm:ml-10"
+                          >
+                            <h3 className="lg:text-lg sm:text-m font-semibold hover:text-primary w-full">
+                              {theme.themeName}
+                            </h3>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             </div>
           ))}

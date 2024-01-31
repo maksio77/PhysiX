@@ -56,7 +56,7 @@ const Theme = () => {
         </h2>
         <div className="flex flex-col items-start max-w-screen-xl mx-auto">
           <Link
-            to={`/sections/${param.section}`}
+            to={`/`}
             className="mt-4 bg-primary text-white p-2 rounded-md text-left self-start"
           >
             Назад
