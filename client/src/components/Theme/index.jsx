@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
-import { replaceUnderscores } from "../../utils/repleceUnderscores";
 import { SectionContext } from "../SectionContext";
+import PaginatedGrid from "../PaginatedGrid";
 import ErrorMessage from "../ErrorMessage";
 import Spinner from "../Spinner";
 
@@ -44,24 +44,27 @@ const Theme = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  function doesPhraseExistInText(text, phrase) {
-    return text.includes(phrase);
-  }
-
   const content =
     sections && sections.length > 0 ? (
       <>
-        <h2 className="text-4xl font-semibold mx-auto mt-28 text-primary">
+        <h2 className="text-4xl font-semibold mx-auto mt-24 text-primary">
           {theme.themeName}
         </h2>
         <div className="flex flex-col items-start max-w-screen-xl mx-auto">
           <Link
             to={`/`}
-            className="mt-4 bg-primary text-white p-2 rounded-md text-left self-start"
+            className="mt-2 bg-primary text-white p-2 rounded-md text-left self-start"
           >
             Назад
           </Link>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 mb-8 w-full">
+          {theme && theme.info && theme.info.length > 0 && (
+            <PaginatedGrid
+              theme={theme}
+              searchPhrase={searchPhrase}
+              isActive={isActive}
+            />
+          )}
+          {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 mb-8 w-full">
             {theme.info &&
               theme.info.map((item) => (
                 <div
@@ -81,7 +84,7 @@ const Theme = () => {
                   </div>
                 </div>
               ))}
-          </div>
+          </div> */}
         </div>
       </>
     ) : null;
