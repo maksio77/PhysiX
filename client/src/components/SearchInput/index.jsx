@@ -1,11 +1,9 @@
 import { MdClear } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 const SearchInput = ({
   inputText,
   handleSearchChange,
   handleResetSearch,
-  searchResults,
 }) => {
   return (
     <div className="flex w-full">
@@ -22,25 +20,6 @@ const SearchInput = ({
       >
         <MdClear />
       </button>
-
-      {searchResults.length > 0 && (
-        <ul className="absolute max-w-screen-xl mx-auto top-full left-0 bg-white mt-2 border border-secondary rounded-md py-2 px-4 shadow-md overflow-auto max-h-48 w-full z-10">
-          {searchResults.map((result, index) => (
-            <li
-              key={index}
-              className="mb-1 border p-2 border-secondary w-full rounded-xl"
-            >
-              <Link
-                to={result.route}
-                state={result.state}
-                className="block text-black hover:text-primary w-full"
-              >
-                {result.text}
-              </Link>
-            </li>
-          ))}
-        </ul>
-      )}
     </div>
   );
 };
