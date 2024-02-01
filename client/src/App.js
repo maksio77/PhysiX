@@ -22,7 +22,7 @@ function App() {
           {user && <Route path="/" exact element={<Main />} />}
           {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
           {user && (
-            <Route path="/sections/:section/:theme" exact element={<Theme />} />
+            <Route path="/sections/:section/:theme/:page" exact element={<Theme />} />
           )}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />

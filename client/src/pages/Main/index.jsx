@@ -80,7 +80,7 @@ const Main = () => {
                           className="mb-1 border p-2 border-secondary rounded-xl"
                         >
                           <Link
-                            to={`/sections/${section.routeName}/${theme.themeRoute}`}
+                            to={`/sections/${section.routeName}/${theme.themeRoute}/1`}
                             style={{
                               alignSelf: "flex-start",
                               textDecoration: "none",

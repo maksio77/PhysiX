@@ -9,7 +9,6 @@ const Theme = () => {
   const { sections, error, loading } = useContext(SectionContext);
 
   const [theme, setTheme] = useState({});
-  const [isActive, setIsActive] = useState(true);
 
   const param = useParams();
   const themeRouteName = param.theme;
@@ -37,13 +36,6 @@ const Theme = () => {
     }
   }, [themeRouteName, sections]);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsActive(false);
-    }, 10000);
-    return () => clearTimeout(timer);
-  }, []);
-
   const content =
     sections && sections.length > 0 ? (
       <>
@@ -58,11 +50,7 @@ const Theme = () => {
             Назад
           </Link>
           {theme && theme.info && theme.info.length > 0 && (
-            <PaginatedGrid
-              theme={theme}
-              searchPhrase={searchPhrase}
-              isActive={isActive}
-            />
+            <PaginatedGrid theme={theme} searchPhrase={searchPhrase} />
           )}
           {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 mb-8 w-full">
             {theme.info &&

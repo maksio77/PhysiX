@@ -1,13 +1,41 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { replaceUnderscores } from "../../utils/repleceUnderscores";
+import { GrLinkNext } from "react-icons/gr";
+import { GrLinkPrevious } from "react-icons/gr";
 
 const itemsPerPage = 6;
 
-const PaginatedGrid = ({ theme, searchPhrase, isActive }) => {
-  const [currentPage, setCurrentPage] = useState(1);
+const PaginatedGrid = ({ theme, searchPhrase }) => {
+  let navigate = useNavigate();
+  let { page } = useParams();
+  const pagesCount = theme.info.length / itemsPerPage;
+
+  const [currentPage, setCurrentPage] = useState(parseInt(page));
+  const [isActive, setIsActive] = useState(true);
+
+  useEffect(() => {
+    if (pagesCount < currentPage - 1) {
+      navigate("/error");
+    }
+    window.history.pushState(null, "", currentPage);
+  }, [currentPage]);
+
+  // useEffect(() => {
+  //   navigate(`/sections/${section}/${theme}/${currentPage}`);
+  // }, [currentPage]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsActive(false);
+    }, 60000);
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
 
   const handleClickNext = () => {
-    const pagesCount = theme.info.length / itemsPerPage
     if (pagesCount > currentPage) {
       setCurrentPage(currentPage + 1);
     }
@@ -51,12 +79,28 @@ const PaginatedGrid = ({ theme, searchPhrase, isActive }) => {
         ))}
       </div>
       <div className="flex justify-between mb-4">
-        <button className="w-1/2 px-2 border-2 border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary" onClick={handleClickPrev}>
-          Prev
+        <button
+          className={`flex items-center w-1/2 px-2 border-2 border-secondary rounded-md ${
+            currentPage !== 1
+              ? "text-white bg-primary hover:bg-secondary hover:text-primary"
+              : "bg-secondary text-primary cursor-default"
+          }`}
+          onClick={handleClickPrev}
+        >
+          <GrLinkPrevious />
+          <div className="flex-grow flex justify-center">Попередня</div>
         </button>
         <p className="text-xl m-2">{currentPage}</p>
-        <button className="w-1/2 px-2 border-2 border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary" onClick={handleClickNext}>
-          Next
+        <button
+          className={`flex items-center w-1/2 px-2 border-2 border-secondary rounded-md ${
+            pagesCount > currentPage
+              ? "text-white bg-primary hover:bg-secondary hover:text-primary"
+              : "bg-secondary text-primary cursor-default"
+          }`}
+          onClick={handleClickNext}
+        >
+          <div className="flex-grow flex justify-center">Наступна</div>
+          <GrLinkNext />
         </button>
       </div>
     </div>
