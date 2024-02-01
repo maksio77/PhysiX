@@ -4,11 +4,14 @@ import { SectionContext } from "../../components/SectionContext";
 import PaginatedGrid from "../../components/PaginatedGrid";
 import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
+import SearchInput from "../../components/SearchInput";
 
 const Theme = () => {
   const { sections, error, loading } = useContext(SectionContext);
 
   const [theme, setTheme] = useState({});
+  const [originalData, setOriginalData] = useState({});
+  const [inputText, setInputText] = useState("");
 
   const param = useParams();
   const themeRouteName = param.theme;
@@ -32,9 +35,41 @@ const Theme = () => {
     }
 
     if (sections && sections.length > 0) {
-      setTheme(getObjectByThemeRoute(sections, themeRouteName));
+      const res = getObjectByThemeRoute(sections, themeRouteName);
+      setTheme(res);
+      setOriginalData(res);
     }
   }, [themeRouteName, sections]);
+
+  const filterByInput = (array, text) => {
+    const lowerCaseText = text.toLowerCase();
+    return array.filter((obj) => {
+      for (let key in obj) {
+        if (String(obj[key]).toLowerCase().includes(lowerCaseText)) {
+          return true;
+        }
+      }
+      return false;
+    });
+  };
+
+  const handleSearchChange = (e) => {
+    setInputText(e.target.value);
+
+    if (e.target.value === "") {
+      setTheme(originalData);
+    } else {
+      const res = filterByInput(theme.info, e.target.value);
+      if (res.length > 0) {
+        setTheme({ ...theme, info: res });
+      }
+    }
+  };
+
+  const handleResetSearch = () => {
+    setInputText("");
+    setTheme(originalData);
+  };
 
   const content =
     sections && sections.length > 0 ? (
@@ -42,37 +77,26 @@ const Theme = () => {
         <h2 className="lg:text-4xl sm: text-xl font-semibold mx-auto mt-24 text-primary">
           {theme.themeName}
         </h2>
+
         <div className="flex flex-col items-start max-w-screen-xl mx-auto">
-          <Link
-            to={`/`}
-            className="sm: text-xs lg:text-base mt-2 p-2 border-2 border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary text-left self-start"
-          >
-            Назад
-          </Link>
+          <div className="flex w-full lg:mt-8 sm: mt-2 space-x-4">
+            <Link
+              to={`/`}
+              className="flex-initial sm:text-xs lg:text-base p-2 border-2 border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary text-left self-start"
+            >
+              Назад
+            </Link>
+            <SearchInput
+              className="flex-grow w-full"
+              inputText={inputText}
+              handleSearchChange={handleSearchChange}
+              handleResetSearch={handleResetSearch}
+            />
+          </div>
+
           {theme && theme.info && theme.info.length > 0 && (
             <PaginatedGrid theme={theme} searchPhrase={searchPhrase} />
           )}
-          {/* <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4 mb-8 w-full">
-            {theme.info &&
-              theme.info.map((item) => (
-                <div
-                  key={item._id}
-                  className={`bg-${
-                    searchPhrase &&
-                    doesPhraseExistInText(item.text, searchPhrase) &&
-                    isActive
-                      ? "primary text-white"
-                      : "white"
-                  } rounded-lg overflow-hidden shadow-md`}
-                >
-                  <div className="p-8">
-                    <div className="text-xl">
-                      {replaceUnderscores(item.text, item.formulas)}
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div> */}
         </div>
       </>
     ) : null;
