@@ -47,13 +47,13 @@ const Theme = () => {
   const content =
     sections && sections.length > 0 ? (
       <>
-        <h2 className="text-4xl font-semibold mx-auto mt-24 text-primary">
+        <h2 className="lg:text-4xl sm: text-xl font-semibold mx-auto mt-24 text-primary">
           {theme.themeName}
         </h2>
         <div className="flex flex-col items-start max-w-screen-xl mx-auto">
           <Link
             to={`/`}
-            className="mt-2 bg-primary text-white p-2 rounded-md text-left self-start"
+            className="sm: text-xs lg:text-base mt-2 p-2 border-2 border-secondary rounded-md text-white bg-primary hover:bg-secondary hover:text-primary text-left self-start"
           >
             Назад
           </Link>

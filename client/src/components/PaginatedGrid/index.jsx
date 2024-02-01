@@ -7,7 +7,11 @@ const PaginatedGrid = ({ theme, searchPhrase, isActive }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const handleClickNext = () => {
-    setCurrentPage(currentPage + 1);
+    const pagesCount = theme.info.length / itemsPerPage
+    console.log(pagesCount)
+    if (pagesCount > currentPage) {
+      setCurrentPage(currentPage + 1);
+    }
   };
 
   const handleClickPrev = () => {
@@ -40,7 +44,7 @@ const PaginatedGrid = ({ theme, searchPhrase, isActive }) => {
             } rounded-lg overflow-hidden shadow-md`}
           >
             <div className="p-8">
-              <div className="text-xl">
+              <div className="lg:text-xl">
                 {replaceUnderscores(item.text, item.formulas)}
               </div>
             </div>
