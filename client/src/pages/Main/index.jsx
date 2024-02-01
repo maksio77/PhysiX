@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import SearchInput from "../SearchInput";
-import ErrorMessage from "../ErrorMessage";
-import Spinner from "../Spinner";
+import SearchInput from "../../components/SearchInput";
+import ErrorMessage from "../../components/ErrorMessage";
+import Spinner from "../../components/Spinner";
 import { searchInputText } from "../../utils/searchInputText";
-import { SectionContext } from "../SectionContext";
+import { SectionContext } from "../../components/SectionContext";
 
 const Main = () => {
   const { sections, error, loading } = useContext(SectionContext);

@@ -1,14 +1,14 @@
 import { Route, Routes, Navigate } from "react-router-dom";
-import Main from "./components/Main";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import EmailVerify from "./components/EmailVerify";
-import ForgotPassword from "./components/ForgotPassword";
-import PasswordReset from "./components/PasswordReset";
+import Main from './pages/Main'
+import Signup from "./pages/Signup";
+import Login from "./pages/Login";
+import EmailVerify from "./pages/EmailVerify";
+import ForgotPassword from "./pages/ForgotPassword";
+import PasswordReset from "./pages/PasswordReset";
 //import Section from "./components/Section";
 import Header from "./components/Header";
-import Theme from "./components/Theme";
-import Page404 from "./components/404";
+import Theme from "./pages/Theme";
+import Page404 from "./pages/404";
 import ErorrBoundary from "./components/ErorrBoundary";
 
 function App() {

@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
-import { SectionContext } from "../SectionContext";
-import PaginatedGrid from "../PaginatedGrid";
-import ErrorMessage from "../ErrorMessage";
-import Spinner from "../Spinner";
+import { SectionContext } from "../../components/SectionContext";
+import PaginatedGrid from "../../components/PaginatedGrid";
+import ErrorMessage from "../../components/ErrorMessage";
+import Spinner from "../../components/Spinner";
 
 const Theme = () => {
   const { sections, error, loading } = useContext(SectionContext);

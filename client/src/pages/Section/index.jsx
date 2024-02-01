@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
-import { SectionContext } from "../SectionContext";
-import ErrorMessage from "../ErrorMessage";
-import Spinner from "../Spinner";
+import { SectionContext } from "../../components/SectionContext";
+import ErrorMessage from "../../components/ErrorMessage";
+import Spinner from "../../components/Spinner";
 
 const Section = () => {
   const { sections, error, loading } = useContext(SectionContext);
