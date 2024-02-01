@@ -8,7 +8,6 @@ const PaginatedGrid = ({ theme, searchPhrase, isActive }) => {
 
   const handleClickNext = () => {
     const pagesCount = theme.info.length / itemsPerPage
-    console.log(pagesCount)
     if (pagesCount > currentPage) {
       setCurrentPage(currentPage + 1);
     }
