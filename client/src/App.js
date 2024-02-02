@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Theme from "./pages/Theme";
 import Page404 from "./pages/404";
 import ErorrBoundary from "./components/ErorrBoundary";
+import Footer from "./components/Footer";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -35,6 +36,7 @@ function App() {
           />
           <Route path="*" element={<Page404 />} />
         </Routes>
+        {user && <Footer/>}
       </ErorrBoundary>
     </>
   );
