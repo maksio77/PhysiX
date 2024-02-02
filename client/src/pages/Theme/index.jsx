@@ -5,10 +5,12 @@ import PaginatedGrid from "../../components/PaginatedGrid";
 import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
 import SearchInput from "../../components/SearchInput";
+import { GrLinkNext } from "react-icons/gr";
 
 const Theme = () => {
   const { sections, error, loading } = useContext(SectionContext);
 
+  const [sectionName, setSectionName] = useState("");
   const [theme, setTheme] = useState({});
   const [originalData, setOriginalData] = useState({});
   const [inputText, setInputText] = useState("");
@@ -27,6 +29,7 @@ const Theme = () => {
       for (let item of array) {
         for (let theme of item.themes) {
           if (theme.themeRoute === themeRoute) {
+            setSectionName(item.sectionName);
             return theme;
           }
         }
@@ -75,7 +78,7 @@ const Theme = () => {
     sections && sections.length > 0 ? (
       <>
         <h2 className="lg:text-4xl sm: text-xl font-semibold mx-auto mt-24 text-primary">
-          {theme.themeName}
+          {sectionName} <GrLinkNext className="inline" /> {theme.themeName}
         </h2>
 
         <div className="flex flex-col items-start max-w-screen-xl mx-auto">
@@ -95,7 +98,11 @@ const Theme = () => {
           </div>
 
           {theme && theme.info && theme.info.length > 0 && (
-            <PaginatedGrid theme={theme} searchPhrase={searchPhrase} inputText={inputText}/>
+            <PaginatedGrid
+              theme={theme}
+              searchPhrase={searchPhrase}
+              inputText={inputText}
+            />
           )}
         </div>
       </>
