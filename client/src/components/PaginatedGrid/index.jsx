@@ -6,24 +6,29 @@ import { GrLinkPrevious } from "react-icons/gr";
 
 const itemsPerPage = 6;
 
-const PaginatedGrid = ({ theme, searchPhrase }) => {
+const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
   let navigate = useNavigate();
-  let { page } = useParams();
+  let { page, section } = useParams();
   const pagesCount = theme.info.length / itemsPerPage;
 
   const [currentPage, setCurrentPage] = useState(parseInt(page));
   const [isActive, setIsActive] = useState(true);
 
-  useEffect(() => {
-    if (pagesCount < currentPage - 1) {
-      navigate("/error");
-    }
-    window.history.pushState(null, "", currentPage);
-  }, [currentPage]);
+  const goToFirstPage = () => {
+    setCurrentPage(1);
+    navigate(`/sections/${section}/${theme.themeRoute}/${currentPage}`);
+  };
 
-  // useEffect(() => {
-  //   navigate(`/sections/${section}/${theme}/${currentPage}`);
-  // }, [currentPage]);
+  useEffect(() => {
+    if (pagesCount + 1 <= currentPage || currentPage <=0)
+      goToFirstPage();  
+
+    window.history.pushState(null, "", currentPage);
+
+    if (inputText && theme.info.length <=6)
+      goToFirstPage();
+
+  }, [currentPage, inputText]);
 
   useEffect(() => {
     const timer = setTimeout(() => {

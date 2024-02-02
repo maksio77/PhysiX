@@ -95,7 +95,7 @@ const Theme = () => {
           </div>
 
           {theme && theme.info && theme.info.length > 0 && (
-            <PaginatedGrid theme={theme} searchPhrase={searchPhrase} />
+            <PaginatedGrid theme={theme} searchPhrase={searchPhrase} inputText={inputText}/>
           )}
         </div>
       </>
