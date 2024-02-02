@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
 import SearchInput from "../../components/SearchInput";
 import ErrorMessage from "../../components/ErrorMessage";
@@ -13,6 +13,24 @@ const Main = () => {
   const [inputText, setInputText] = useState("");
   const [themes, setThemes] = useState({});
   const [openTheme, setOpenTheme] = useState("");
+
+  const dropdownRef = useRef(null);
+  const buttonRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target)
+      ) {
+        setOpenTheme(null);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
   const findThemesByRouteName = (routeName, array) => {
     if (openTheme === routeName) {
@@ -81,6 +99,7 @@ const Main = () => {
                 <div className="p-4">
                   <h3 className="lg:text-lg sm:text-m font-semibold hover:text-primary w-full">
                     <button
+                      ref={buttonRef}
                       onClick={() =>
                         findThemesByRouteName(section.routeName, sections)
                       }
@@ -90,7 +109,10 @@ const Main = () => {
                   </h3>
                 </div>
                 {openTheme === section.routeName && themes.length > 0 && (
-                  <div className="absolute right-0 top-16 bg-white border border-secondary rounded-xl p-2 shadow-md overflow-auto max-h-48 w-72 z-50">
+                  <div
+                    ref={dropdownRef}
+                    className="absolute right-0 top-16 bg-white border border-secondary rounded-xl p-2 shadow-md overflow-auto max-h-48 w-72 z-50"
+                  >
                     <ul className="dropdown-content">
                       {themes.map((theme, index) => (
                         <li
