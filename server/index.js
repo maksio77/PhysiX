@@ -7,6 +7,7 @@ const userRotes = require("./routes/users");
 const authRotes = require("./routes/auth");
 const passwordResetRoutes = require("./routes/passwordReset");
 const sectionsRoutes = require("./routes/sections");
+const testsRoutes = require("./routes/tests");
 
 // DB connection
 connection();
@@ -20,6 +21,7 @@ app.use("/api/users", userRotes);
 app.use("/api/auth", authRotes);
 app.use("/api/password-reset", passwordResetRoutes);
 app.use("/api/sections", sectionsRoutes);
+app.use("/api/tests", testsRoutes);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
