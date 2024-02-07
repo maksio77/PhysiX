@@ -4,14 +4,17 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./App";
 import SectionProvider from "./components/SectionContext";
+import TestProvider from "./components/TestContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <SectionProvider>
-      <BrowserRouter>
+    <TestProvider>
+      <SectionProvider>
+        <BrowserRouter>
           <App />
-      </BrowserRouter>
-    </SectionProvider>
+        </BrowserRouter>
+      </SectionProvider>
+    </TestProvider>
   </React.StrictMode>
 );

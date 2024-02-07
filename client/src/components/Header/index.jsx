@@ -41,7 +41,9 @@ const Header = () => {
         </button>
       </div>
       <Link to={"/"}>
-        <h1 className="sm: text-2xl lg:text-4xl text-white hover:text-secondary">PhysiX</h1>
+        <h1 className="sm: text-2xl lg:text-4xl text-white hover:text-secondary">
+          PhysiX
+        </h1>
       </Link>
       <button
         onClick={handleLogout}
@@ -59,18 +61,28 @@ const Header = () => {
           onClick={(e) => e.stopPropagation()}
           className="absolute top-full rounded-xl left-0 lg:w-64 bg-white z-20 flex flex-col p-4 items-center space-around space-y-4 transition-transform duration-200 transform translate-x-0 overflow-auto shadow-lg"
         >
-          <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
-            <FaRobot className="self-start" size={20}/>
-            <span className="self-center flex-grow text-center">Симуляції</span>
-          </button>
-          <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
-            <FaNoteSticky size={20} className="self-start" />
-            <span className="self-center flex-grow text-center px-3">Тестування</span>
-          </button>
-          <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
-            <FaStar size={20} className="self-start" />
-            <span className="self-center flex-grow text-center">Обране</span>
-          </button>
+          <Link to={"/simulations"} style={{ textDecoration: "none", width: "100%" }}>
+            <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+              <FaRobot className="self-start" size={20} />
+              <span className="self-center flex-grow text-center px-3">
+                Симуляції
+              </span>
+            </button>
+          </Link>
+          <Link to={"/tests"} style={{ textDecoration: "none", width: "100%" }}>
+            <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+              <FaNoteSticky size={20} className="self-start" />
+              <span className="self-center flex-grow text-center px-3">
+                Тестування
+              </span>
+            </button>
+          </Link>
+          <Link to={"/favourites"} style={{ textDecoration: "none", width: "100%" }}>
+            <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+              <FaStar size={20} className="self-start" />
+              <span className="self-center flex-grow text-center px-3">Обране</span>
+            </button>
+          </Link>
         </div>
       )}
     </header>

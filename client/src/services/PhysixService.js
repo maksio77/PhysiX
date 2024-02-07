@@ -4,7 +4,12 @@ const usePhysixService = () => {
   const { loading, request, error, clearError } = useHttp();
 
   const getAllSections = async () => {
-    const res = await request();
+    const res = await request('sections');
+    return res;
+  }
+
+  const getAllTests = async () => {
+    const res = await request('tests');
     return res;
   }
 
@@ -13,6 +18,7 @@ const usePhysixService = () => {
     error,
     clearError,
     getAllSections,
+    getAllTests
   };
 }
 

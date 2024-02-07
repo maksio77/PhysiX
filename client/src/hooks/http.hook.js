@@ -6,10 +6,10 @@ export const useHttp = () => {
 
   const clearError = useCallback(() => setError(null), []);
 
-  const request = useCallback( async (method = 'GET', body = null, headers = {'Content-Type': 'application/json'}) => {
+  const request = useCallback( async (type, method = 'GET', body = null, headers = {'Content-Type': 'application/json'}) => {
     setLoading(true);
     try {
-      const url = `http://localhost:4000/api/sections`;
+      const url = `http://localhost:4000/api/${type}`;
       const response = (await fetch(url, {method,body,headers}));
 
       if(!response.ok){

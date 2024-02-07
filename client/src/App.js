@@ -11,6 +11,7 @@ import Theme from "./pages/Theme";
 import Page404 from "./pages/404";
 import ErorrBoundary from "./components/ErorrBoundary";
 import Footer from "./components/Footer";
+import TestThemes from "./pages/TestThemes";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -21,19 +22,15 @@ function App() {
         {user && <Header />}
         <Routes>
           {user && <Route path="/" exact element={<Main />} />}
+          {user && <Route path="/sections/:section/:theme/:page" exact element={<Theme />} />}
+          {user && <Route path="/tests" exact element={<TestThemes />} />}
           {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
-          {user && (
-            <Route path="/sections/:section/:theme/:page" exact element={<Theme />} />
-          )}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/" exact element={<Navigate replace to="/login" />} />
           <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route
-            path="/password-reset/:id/:token"
-            element={<PasswordReset />}
-          />
+          <Route path="/password-reset/:id/:token" element={<PasswordReset />}/>
           <Route path="*" element={<Page404 />} />
         </Routes>
         {user && <Footer/>}
