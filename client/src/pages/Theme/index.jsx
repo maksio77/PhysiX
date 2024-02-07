@@ -112,7 +112,7 @@ const Theme = () => {
   const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
-    <div className="min-h-screen flex mx-auto flex-col justify-center items-center bg-secondary">
+    <div className="min-h-[91vh] flex mx-auto flex-col justify-center items-center bg-secondary">
       {errorMessage}
       {spinner}
       {content}

@@ -57,7 +57,7 @@ const Main = () => {
   const content =
     sections.length !== 0 ? (
       <>
-        <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-28 mb-4 relative w-full">
+        <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-24 mb-4 relative w-full">
           <SearchInput
             inputText={inputText}
             handleSearchChange={handleSearchChange}
@@ -147,7 +147,7 @@ const Main = () => {
   const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-secondary">
+    <div className="min-h-[91vh] flex flex-col justify-center items-center bg-secondary">
       {errorMessage}
       {spinner}
       {content}
