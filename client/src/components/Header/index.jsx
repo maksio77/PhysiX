@@ -4,6 +4,7 @@ import { TfiMenu } from "react-icons/tfi";
 import { FaRobot } from "react-icons/fa6";
 import { FaNoteSticky } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
+import { IoMdHome } from "react-icons/io";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,8 +62,16 @@ const Header = () => {
           onClick={(e) => e.stopPropagation()}
           className="absolute top-full rounded-xl left-0 lg:w-64 bg-white z-20 flex flex-col p-4 items-center space-around space-y-4 transition-transform duration-200 transform translate-x-0 overflow-auto shadow-lg"
         >
+          <Link to={"/"} style={{ textDecoration: "none", width: "100%" }}>
+            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+              <IoMdHome className="self-start" size={20} />
+              <span className="self-center flex-grow text-center px-3">
+                На головну
+              </span>
+            </button>
+          </Link>
           <Link to={"/simulations"} style={{ textDecoration: "none", width: "100%" }}>
-            <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
               <FaRobot className="self-start" size={20} />
               <span className="self-center flex-grow text-center px-3">
                 Симуляції
@@ -70,7 +79,7 @@ const Header = () => {
             </button>
           </Link>
           <Link to={"/tests"} style={{ textDecoration: "none", width: "100%" }}>
-            <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
               <FaNoteSticky size={20} className="self-start" />
               <span className="self-center flex-grow text-center px-3">
                 Тестування
@@ -78,7 +87,7 @@ const Header = () => {
             </button>
           </Link>
           <Link to={"/favourites"} style={{ textDecoration: "none", width: "100%" }}>
-            <button className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
               <FaStar size={20} className="self-start" />
               <span className="self-center flex-grow text-center px-3">Обране</span>
             </button>
