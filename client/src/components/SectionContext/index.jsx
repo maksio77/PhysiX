@@ -12,8 +12,10 @@ const SectionProvider = (props) => {
       setSections(JSON.parse(storedSections));
     } else {
       getAllSections().then((res) => {
-        setSections(res);
-        localStorage.setItem("sections", JSON.stringify(res));
+        if(res.length !== 0) {
+          setSections(res);
+          localStorage.setItem("sections", JSON.stringify(res));
+        }
       });
     }
   }, []);

@@ -12,8 +12,10 @@ const TestProvider = (props) => {
       setTests(JSON.parse(storedTests));
     } else {
       getAllTests().then((res) => {
-        setTests(res);
-        localStorage.setItem("tests", JSON.stringify(res));
+        if(res.length !== 0) {
+          setTests(res);
+          localStorage.setItem("tests", JSON.stringify(res));
+        }
       });
     }
   }, []);

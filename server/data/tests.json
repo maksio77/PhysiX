@@ -235,6 +235,114 @@
             "correct": 2
           }
         ]
+      },
+      {
+        "themeName": "Основи динаміки.",
+        "themeRoute": "fundamentalsDynamics",
+        "tests": []
+      },
+      {
+        "themeName": "Елементи механіки рідин та газів.",
+        "themeRoute": "elementsMechanicsLiquidsGases",
+        "tests": []
+      },
+      {
+        "themeName": "Закони збереження в механіці. ",
+        "themeRoute": "conservationLawsMechanics",
+        "tests": []
+      },
+      {
+        "themeName": "Механічні коливання і хвилі.",
+        "themeRoute": "mechanicalVibrationsWaves.",
+        "tests": []
+      }
+    ]
+  },
+  {
+    "id":  1,
+    "sectionName": "Молекулярна фізика і термодинаміка",
+    "routeName": "molecular_thermodynamics",
+    "themes": [
+      {
+        "themeName": "Основи молекулярно - кінетичної теорії. ",
+        "themeRoute": "fundamentalsMolecular-kineticTheory.",
+        "tests": []
+      },
+      {
+        "themeName": "Основи термодинаміки.",
+        "themeRoute": "fundamentalsThermodynamics",
+        "tests": []
+      },
+      {
+        "themeName": "Властивості газів, рідин і твердих тіл.",
+        "themeRoute": "propertiesGasesLiquidsSolids",
+        "tests": []
+      }
+    ] 
+  },
+  {
+    "id":  2,
+    "sectionName": "Електродинаміка",
+    "routeName": "electrodynamics",
+    "themes": [
+      {
+        "themeName": "Основи електростатики.",
+        "themeRoute": "basicsElectrostatics",
+        "tests": []
+      },
+      {
+        "themeName": "Закони постійного струму.",
+        "themeRoute": "lawsDirectCurrent",
+        "tests": []
+      },
+      {
+        "themeName": "Електричний струм у різних середовищах.",
+        "themeRoute": "electricCurrentDifferentEnvironments",
+        "tests": []
+      },
+      {
+        "themeName": "Магнітне поле, електромагнітна індукція. Взаємодія",
+        "themeRoute": "magneticField",
+        "tests": []
+      }
+    ]
+  },
+  {
+    "id":  3,
+    "sectionName": "Електромагнітні коливання і хвилі. Оптика",
+    "routeName": "electromagnetic_optics",
+    "themes": [
+      {
+        "themeName": "Електромагнітні коливання і хвилі.",
+        "themeRoute": "electromagneticVibrationsWaves",
+        "tests": []
+      },
+      {
+        "themeName": "Оптика.",
+        "themeRoute": "optics",
+        "tests": []
+      }
+    ]
+  },
+  {
+    "id":  4,
+    "sectionName": "Квантова фізика. Елементи теорії відносності.",
+    "routeName": "quantum_physics",
+    "themes": [
+      {
+        "themeName": "Елементи теорії відносності.",
+        "themeRoute": "elementsTheoryRelativity",
+        "tests": []
+      },
+      {
+        "themeName": "Світлові кванти. ",
+        "themeRoute": "lightQuanta",
+        "tests": []
+      },
+      {
+        "themeName": "Атом та атомне ядро.",
+        "themeRoute": "atomicNucleus",
+        "tests": []
       }
     ]
   }
