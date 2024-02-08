@@ -20,7 +20,7 @@ const testSchema = new Schema({
         tests: [
           {
             title: String,
-            image: { data: Buffer, contentType: String },
+            image: String,
             alt: String,
             variants: [String],
             correct: Number,

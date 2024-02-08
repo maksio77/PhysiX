@@ -25,7 +25,7 @@ export default function TestThemes() {
 
   const content =
     tests && tests.length > 0 ? (
-      <div className="mt-28 flex flex-col justify-center items-center">
+      <div className="mt-28 flex flex-col justify-center sm: mx-2 items-center">
         <h2 className="text-4xl font-semibold mx-auto text-primary">
           Тестування за темами та розділами
         </h2>
@@ -63,7 +63,12 @@ export default function TestThemes() {
                             className="px-4 py-2 hover:bg-gray-200"
                             onClick={(e) => e.stopPropagation()}
                           >
-                            <Link>{theme.themeName}</Link>
+                            <Link
+                              to={`/tests/${theme.themeRoute}`}
+                              state={{ tests: theme.tests, themeName: theme.themeName }}
+                            >
+                              {theme.themeName}
+                            </Link>
                           </li>
                         ))}
                       </ul>

@@ -12,6 +12,7 @@ import Page404 from "./pages/404";
 import ErorrBoundary from "./components/ErorrBoundary";
 import Footer from "./components/Footer";
 import TestThemes from "./pages/TestThemes";
+import Testing from "./pages/Testing";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -24,6 +25,7 @@ function App() {
           {user && <Route path="/" exact element={<Main />} />}
           {user && <Route path="/sections/:section/:theme/:page" exact element={<Theme />} />}
           {user && <Route path="/tests" exact element={<TestThemes />} />}
+          {user && <Route path="/tests/:theme" exact element={<Testing />} />}
           {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />

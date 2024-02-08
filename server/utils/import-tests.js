@@ -24,10 +24,8 @@ const importData = async (data) => {
             let imagePath = path.join(__dirname, "../data", test.image);
             let imageBuffer = fs.readFileSync(imagePath);
             let imageBase64 = imageBuffer.toString("base64");
-            test.image = {
-              data: imageBase64,
-              contentType: "image/png",
-            };
+            let imageTag = `<img src="data:image/png;base64,${imageBase64}" alt="Image" />`;
+            test.image = imageTag;
           }
         }
       }
@@ -39,16 +37,6 @@ const importData = async (data) => {
     console.log(e);
   }
 };
-
-// const importData = async () => {
-//   try {
-//     await Test.create(test);
-//     console.log("Data saved successfully");
-//     process.exit();
-//   } catch (e) {
-//     console.log(e);
-//   }
-// };
 
 const deleteData = async () => {
   try {
