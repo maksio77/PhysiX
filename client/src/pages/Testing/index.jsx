@@ -1,11 +1,27 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FaRegStar } from "react-icons/fa";
+import usePhysixService from "../../services/PhysixService";
+import ErrorMessage from "../../components/ErrorMessage";
+import Spinner from "../../components/Spinner";
+
 //import { FaStar } from "react-icons/fa";
 
 function Result({ correct, restart, length }) {
-  return (
-    <div className="flex flex-col items-center justify-center">
+  const token = localStorage.getItem("token");
+  const { addPoints, error, loading } = usePhysixService();
+
+  const handleFinish = () => {
+    addPoints(correct, token);
+  };
+
+  const handleRestart = () => {
+    addPoints(correct, token);
+    restart();
+  };
+
+  const content = (
+    <>
       <img
         className="w-24 h-24 mb-2"
         src="https://cdn-icons-png.flaticon.com/512/2278/2278992.png"
@@ -16,16 +32,28 @@ function Result({ correct, restart, length }) {
       </h2>
       <button
         className="px-8 py-2 text-white bg-primary rounded hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out"
-        onClick={restart}
+        onClick={handleRestart}
       >
         Спробувати ще раз
       </button>
       <Link
         to={`/tests`}
         className="mt-4 px-8 py-2 text-white bg-primary rounded hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out"
+        onClick={handleFinish}
       >
         Обрати тест
       </Link>
+    </>
+  );
+
+  const errorMessage = error ? <ErrorMessage message={error} /> : null;
+  const spinner = loading ? <Spinner loading={loading} /> : null;
+
+  return (
+    <div className="flex flex-col items-center justify-center">
+      {content}
+      {errorMessage}
+      {spinner}
     </div>
   );
 }

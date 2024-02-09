@@ -28,5 +28,13 @@ export const useHttp = () => {
     }
   },[]);
 
-  return { loading, request, error, clearError };
+  const addPoints = useCallback(async (points, token) => {
+    const headers = {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    };
+    return await request('users/addPoints', 'POST', JSON.stringify({points}), headers);
+  }, [request]);
+
+  return { loading, request, addPoints, error, clearError };
 };

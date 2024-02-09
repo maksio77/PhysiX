@@ -5,6 +5,7 @@ const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 const deleteToken = require("../utils/deleteToken");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
   try {
@@ -56,6 +57,37 @@ router.get("/:id/verify/:token/", async (req, res) => {
     res.status(200).send({ message: "Email verified successfully" });
   } catch (error) {
     res.status(500).send({ message: `Internal Server Error${error}` });
+  }
+});
+
+router.post("/addPoints", async (req, res) => {
+  try {
+    const token = req.headers["x-access-token"];
+    if (!token)
+      return res
+        .status(401)
+        .send({ auth: false, message: "No token provided." });
+
+    jwt.verify(token, process.env.JWTPRIVATEKEY, async function (err, decoded) {
+      if (err)
+        return res
+          .status(500)
+          .send({ auth: false, message: "Failed to authenticate token." });
+
+      const userId = decoded._id;
+      const { points } = req.body;
+
+      const user = await User.findOneAndUpdate(
+        { _id: userId },
+        { $inc: { points: points } },
+        { new: true }
+      );
+
+      if (!user) return res.status(404).send({ message: "User not found" });
+      res.send(user);
+    });
+  } catch (error) {
+    return res.status(500).send(error);
   }
 });
 
