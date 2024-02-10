@@ -74,29 +74,37 @@ router.post("/addPoints", verifyToken, async (req, res) => {
       if (!user) return res.status(404).send({ message: "User not found" });
       res.send(user);
     } catch (error) {
-      return res.status(500).send(error);
+      res.status(500).send({ message: `Internal Server Error${error}` });
     }
   }
 });
 
 router.post("/addFavoriteTest", verifyToken, async (req, res) => {
-  {
-    try {
-      const { test } = req.body;
+  try {
+    const { test } = req.body;
 
-      const user = await User.findOneAndUpdate(
-        { _id: req.userId },
-        { $push: { favoriteTests: test } },
-        { new: true }
-      );
+    const user = await User.findOne({
+      _id: req.userId,
+      "favoriteTests._id": test._id,
+    });
 
-      if (!user) return res.status(404).send({ message: "User not found" });
-      res.send(user);
-    } catch (error) {
-      {
-        return res.status(500).send(error);
-      }
+    if (user) {
+      return res.send(user);
     }
+
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: req.userId },
+      { $push: { favoriteTests: test } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).send({ message: "User not found" });
+    }
+
+    res.send(updatedUser);
+  } catch (error) {
+    res.status(500).send({ message: `Internal Server Error${error}` });
   }
 });
 
@@ -115,9 +123,25 @@ router.post("/removeFavoriteTest", verifyToken, async (req, res) => {
       res.send(user);
     } catch (error) {
       {
-        return res.status(500).send(error);
+        res.status(500).send({ message: `Internal Server Error${error}` });
       }
     }
+  }
+});
+
+router.get("/favoriteTestsIDS", verifyToken, async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId).populate("favoriteTests");
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user.favoriteTests.map((test) => test._id));
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: `Internal Server Error${error}` });
   }
 });
 

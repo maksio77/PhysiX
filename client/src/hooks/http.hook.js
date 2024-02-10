@@ -28,21 +28,5 @@ export const useHttp = () => {
     }
   },[]);
 
-  const addPoints = useCallback(async (points, token) => {
-    const headers = {
-      "Content-Type": "application/json",
-      "x-access-token": token,
-    };
-    return await request('users/addPoints', 'POST', JSON.stringify({points}), headers);
-  }, [request]);
-
-  // const addToFavorites = useCallback(async (testId, token) => {
-  //   const headers = {
-  //     "Content-Type": "application/json",
-  //     "x-access-token": token,
-  //   };
-  //   return await request(`users/favorites/add`, 'POST', JSON.stringify({testId}), headers);
-  // }, [request]);
-
-  return { loading, request, addPoints, error, clearError };
+  return { loading, error, clearError, request };
 };
