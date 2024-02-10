@@ -5,7 +5,7 @@ const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
 const deleteToken = require("../utils/deleteToken");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
+const verifyToken = require("../utils/verifyToken");
 
 router.post("/", async (req, res) => {
   try {
@@ -60,34 +60,64 @@ router.get("/:id/verify/:token/", async (req, res) => {
   }
 });
 
-router.post("/addPoints", async (req, res) => {
-  try {
-    const token = req.headers["x-access-token"];
-    if (!token)
-      return res
-        .status(401)
-        .send({ auth: false, message: "No token provided." });
-
-    jwt.verify(token, process.env.JWTPRIVATEKEY, async function (err, decoded) {
-      if (err)
-        return res
-          .status(500)
-          .send({ auth: false, message: "Failed to authenticate token." });
-
-      const userId = decoded._id;
+router.post("/addPoints", verifyToken, async (req, res) => {
+  {
+    try {
       const { points } = req.body;
 
       const user = await User.findOneAndUpdate(
-        { _id: userId },
+        { _id: req.userId },
         { $inc: { points: points } },
         { new: true }
       );
 
       if (!user) return res.status(404).send({ message: "User not found" });
       res.send(user);
-    });
-  } catch (error) {
-    return res.status(500).send(error);
+    } catch (error) {
+      return res.status(500).send(error);
+    }
+  }
+});
+
+router.post("/addFavoriteTest", verifyToken, async (req, res) => {
+  {
+    try {
+      const { test } = req.body;
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.userId },
+        { $push: { favoriteTests: test } },
+        { new: true }
+      );
+
+      if (!user) return res.status(404).send({ message: "User not found" });
+      res.send(user);
+    } catch (error) {
+      {
+        return res.status(500).send(error);
+      }
+    }
+  }
+});
+
+router.post("/removeFavoriteTest", verifyToken, async (req, res) => {
+  {
+    try {
+      const { testId } = req.body;
+
+      const user = await User.findOneAndUpdate(
+        { _id: req.userId },
+        { $pull: { favoriteTests: { _id: testId } } },
+        { new: true }
+      );
+
+      if (!user) return res.status(404).send({ message: "User not found" });
+      res.send(user);
+    } catch (error) {
+      {
+        return res.status(500).send(error);
+      }
+    }
   }
 });
 

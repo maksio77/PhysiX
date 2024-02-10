@@ -44,21 +44,5 @@ export const useHttp = () => {
   //   return await request(`users/favorites/add`, 'POST', JSON.stringify({testId}), headers);
   // }, [request]);
 
-  // router.addFavorite = async (req, res) => {
-  //   try {
-  //     const { testId } = req.body;
-  //     const user = await User.findById(req.userId);
-    
-  //     if(!user.favorites.includes(testId)) {
-  //       user.favorites.push(testId);
-  //       await user.save();
-  //     }
-      
-  //     res.status(200).json({message: 'Test added to favorites'});
-  //   } catch (err) {
-  //     res.status(500).json({ message: 'Something went wrong. Please try again' });
-  //   }
-  // };
-
   return { loading, request, addPoints, error, clearError };
 };
