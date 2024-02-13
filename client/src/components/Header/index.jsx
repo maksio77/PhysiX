@@ -46,32 +46,46 @@ const Header = () => {
           PhysiX
         </h1>
       </Link>
-      <button
-        onClick={handleLogout}
-        className="bg-white lg:text-xl sm: text-sm text-primary px-4 py-2 rounded hover:bg-secondary"
-      >
-        <Link
-          to={"/login"}
-          style={{ alignSelf: "flex-start", textDecoration: "none" }}
+      <div className="flex items-center">
+        <p className="sm:text-sm lg:text-lg text-white mr-2 hidden sm:block">
+          Ім'я користувача
+        </p>
+        <button
+          onClick={handleLogout}
+          className="bg-white lg:text-xl sm: text-sm text-primary px-4 py-2 rounded hover:bg-secondary"
         >
-          Logout
-        </Link>
-      </button>
+          <Link
+            to={"/login"}
+            style={{ alignSelf: "flex-start", textDecoration: "none" }}
+          >
+            Вийти
+          </Link>
+        </button>
+      </div>
       {menuOpen && (
         <div
           onClick={(e) => e.stopPropagation()}
           className="absolute top-full rounded-xl left-0 lg:w-64 bg-white z-20 flex flex-col p-4 items-center space-around space-y-4 transition-transform duration-200 transform translate-x-0 overflow-auto shadow-lg"
         >
           <Link to={"/"} style={{ textDecoration: "none", width: "100%" }}>
-            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+            <button
+              onClick={toggleMenu}
+              className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center"
+            >
               <IoMdHome className="self-start" size={20} />
               <span className="self-center flex-grow text-center px-3">
                 На головну
               </span>
             </button>
           </Link>
-          <Link to={"/simulations"} style={{ textDecoration: "none", width: "100%" }}>
-            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+          <Link
+            to={"/simulations"}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <button
+              onClick={toggleMenu}
+              className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center"
+            >
               <FaRobot className="self-start" size={20} />
               <span className="self-center flex-grow text-center px-3">
                 Симуляції
@@ -79,17 +93,28 @@ const Header = () => {
             </button>
           </Link>
           <Link to={"/tests"} style={{ textDecoration: "none", width: "100%" }}>
-            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+            <button
+              onClick={toggleMenu}
+              className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center"
+            >
               <FaNoteSticky size={20} className="self-start" />
               <span className="self-center flex-grow text-center px-3">
                 Тестування
               </span>
             </button>
           </Link>
-          <Link to={"/favourites"} style={{ textDecoration: "none", width: "100%" }}>
-            <button onClick={toggleMenu} className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center">
+          <Link
+            to={"/favourites"}
+            style={{ textDecoration: "none", width: "100%" }}
+          >
+            <button
+              onClick={toggleMenu}
+              className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center"
+            >
               <FaStar size={20} className="self-start" />
-              <span className="self-center flex-grow text-center px-3">Обране</span>
+              <span className="self-center flex-grow text-center px-3">
+                Обране
+              </span>
             </button>
           </Link>
         </div>
