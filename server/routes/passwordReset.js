@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
             }).save()
         }
             
-        const url = `Hello, please follow the link to reset your password 🔧\n${process.env.BASE_URL}password-reset/${user._id}/${token.token}`;
+        const url = `Привіт, це твій помічник вивчення фізики, будь ласка, перейди за посилання щоб скинути пароль 🔧\n${process.env.BASE_URL}password-reset/${user._id}/${token.token}`;
         await sendEmail(user.email, "PhysiX\nPassword Reset", url);
 
         res.status(200).send({ message: "password reset link sent to your email account" });

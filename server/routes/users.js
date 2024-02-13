@@ -28,7 +28,7 @@ router.post("/", async (req, res) => {
       userId: user._id,
       token: crypto.randomBytes(32).toString("hex"),
     }).save();
-    const url = `Hello, please follow the link to confirm your email 🔧\n${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+    const url = `Привіт, це твій помічник вивчення фізики, будь ласка, перейди за посилання щоб підтвердити електронну пошту 🔧\n${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
     await sendEmail(user.email, "PhysiX\nVerify Email", url);
 
     res
@@ -142,6 +142,20 @@ router.get("/favoriteTestsIDS", verifyToken, async (req, res) => {
   } catch (error) {
     console.error(error);
     res.status(500).send({ message: `Internal Server Error${error}` });
+  }
+});
+
+router.get("/top", async (req, res) => {
+  try {
+    const users = await User.find().sort({ points: -1 }).limit(10);
+    const topUsers = users.map((user) => {
+      const { firstName, lastName, points } = user;
+      return { firstName, lastName, points };
+    });
+    res.json(topUsers);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send({ message: `Internal Server Error${err}` });
   }
 });
 
