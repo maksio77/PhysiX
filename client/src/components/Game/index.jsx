@@ -88,7 +88,7 @@ const Game = ({
           to={`/tests`}
           className="text-sm sm:text-base shadow md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mt-4 bg-primary text-white hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out p-2 text-left rounded-md mb-4"
         >
-          Обрати тест
+          Обрати тему
         </Link>
 
         <button className="mt-4 bg-white shadow hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out text-primary sm:text-base p-2 text-right rounded-md mb-4">
@@ -115,12 +115,12 @@ const Game = ({
           const className = `p-4 bg-white rounded-md shadow cursor-pointer ${
             isSelected
               ? isCorrect
-                ? "bg-green-200"
-                : "bg-red-200"
+                ? "bg-green-300"
+                : "bg-red-500"
               : selectedAnswer !== null
               ? "opacity-50 cursor-not-allowed"
               : "hover:text-primary hover:bg-secondary"
-          }`;
+          } ${isCorrect && selectedAnswer !== null ? "bg-green-300" : ""}`;
           return (
             <li
               onClick={() => {
@@ -138,33 +138,21 @@ const Game = ({
           );
         })}
       </ul>
-      <div className="flex justify-between mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96">
-        <div className="flex justify-start">
-          <button
-            onClick={() => {
-              clearError();
-            }}
-            className="mb-5 p-2 bg-primary text-white rounded-md shadow hover:bg-secondary hover:text-primary text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-lg"
-          >
-            Попереднє запитання
-          </button>
-        </div>
-        <div className="flex justify-end">
-          <button
-            onClick={() => {
-              clearError();
-              onNext();
-            }}
-            disabled={selectedAnswer === null}
-            className={`mb-5 p-2 text-white rounded-md shadow text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-lg ${
-              selectedAnswer === null
-                ? "bg-gray-300 cursor-not-allowed"
-                : "bg-primary hover:bg-secondary hover:text-primary cursor-pointer"
-            }`}
-          >
-            Наступне запитання
-          </button>
-        </div>
+      <div className="flex justify-end mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96">
+        <button
+          onClick={() => {
+            clearError();
+            onNext();
+          }}
+          disabled={selectedAnswer === null}
+          className={`mb-5 p-2 text-white rounded-md shadow text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-lg ${
+            selectedAnswer === null
+              ? "bg-gray-300 cursor-not-allowed"
+              : "bg-primary hover:bg-secondary hover:text-primary cursor-pointer"
+          }`}
+        >
+          Наступне запитання
+        </button>
       </div>
     </>
   );

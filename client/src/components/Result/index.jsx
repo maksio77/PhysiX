@@ -37,7 +37,7 @@ function Result({ correct, restart, length }) {
         className="mt-4 px-8 py-2 text-white bg-primary rounded hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out"
         onClick={handleFinish}
       >
-        Обрати тест
+        Обрати тему
       </Link>
     </>
   );
