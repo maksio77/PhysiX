@@ -6,7 +6,16 @@ import { FaStar } from "react-icons/fa";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 
-const Game = ({ question, onClickVariant, step, length, themeName }) => {
+const Game = ({
+  question,
+  step,
+  length,
+  themeName,
+  selectedAnswer,
+  onClickVariant,
+  onNext,
+  onSelected,
+}) => {
   const token = localStorage.getItem("token");
   const {
     loading,
@@ -77,12 +86,12 @@ const Game = ({ question, onClickVariant, step, length, themeName }) => {
       <div className="flex justify-between mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96 mb-4">
         <Link
           to={`/tests`}
-          className="text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mt-4 bg-primary text-white hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out p-2 text-left rounded-md mb-4"
+          className="text-sm sm:text-base shadow md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mt-4 bg-primary text-white hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out p-2 text-left rounded-md mb-4"
         >
           Обрати тест
         </Link>
 
-        <button className="mt-4 bg-white hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out text-primary sm:text-base p-2 text-right rounded-md mb-4">
+        <button className="mt-4 bg-white shadow hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out text-primary sm:text-base p-2 text-right rounded-md mb-4">
           {!errorMessage && !loading ? star : null}
           {errorMessage}
           {spinner}
@@ -99,22 +108,64 @@ const Game = ({ question, onClickVariant, step, length, themeName }) => {
           />
         </div>
       )}
-      <ul className="space-y-4 mb-10 mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96">
+      <ul className="space-y-4 mb-5 mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96">
         {question.variants.map((text, index) => {
+          const isCorrect = index === question.correct;
+          const isSelected = index === selectedAnswer;
+          const className = `p-4 bg-white rounded-md shadow cursor-pointer ${
+            isSelected
+              ? isCorrect
+                ? "bg-green-200"
+                : "bg-red-200"
+              : selectedAnswer !== null
+              ? "opacity-50 cursor-not-allowed"
+              : "hover:text-primary hover:bg-secondary"
+          }`;
           return (
             <li
               onClick={() => {
-                onClickVariant(index);
-                clearError();
+                if (selectedAnswer === null) {
+                  onClickVariant(index);
+                  onSelected(index);
+                  clearError();
+                }
               }}
               key={text}
-              className="p-4 bg-white rounded-md shadow cursor-pointer hover:text-primary hover:bg-secondary"
+              className={className}
             >
               {text}
             </li>
           );
         })}
       </ul>
+      <div className="flex justify-between mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96">
+        <div className="flex justify-start">
+          <button
+            onClick={() => {
+              clearError();
+            }}
+            className="mb-5 p-2 bg-primary text-white rounded-md shadow hover:bg-secondary hover:text-primary text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-lg"
+          >
+            Попереднє запитання
+          </button>
+        </div>
+        <div className="flex justify-end">
+          <button
+            onClick={() => {
+              clearError();
+              onNext();
+            }}
+            disabled={selectedAnswer === null}
+            className={`mb-5 p-2 text-white rounded-md shadow text-sm sm:text-base md:text-lg lg:text-lg xl:text-lg 2xl:text-lg ${
+              selectedAnswer === null
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-primary hover:bg-secondary hover:text-primary cursor-pointer"
+            }`}
+          >
+            Наступне запитання
+          </button>
+        </div>
+      </div>
     </>
   );
 };

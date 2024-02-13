@@ -9,6 +9,7 @@ function Testing() {
   const [questions, setQuestions] = useState(null);
   const [step, setStep] = useState(0);
   const [correct, setCorrect] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState(null);
   const question = questions && questions[step];
 
   useEffect(() => {
@@ -17,11 +18,21 @@ function Testing() {
     }
   }, [state]);
 
-  const onClickVariant = (index) => {
-    setStep(step + 1);
+  const onSelected = (index) => {
+    setSelectedAnswer(index);
+  };
 
-    if (index === questions[step].correct) {
-      setCorrect(correct + 1);
+  const onNext = () => {
+    setSelectedAnswer(null);
+    setStep(step + 1);
+  };
+
+  const onClickVariant = (index) => {
+    if (selectedAnswer === null) {
+      if (index === questions[step].correct) {
+        setCorrect(correct + 1);
+      }
+      setSelectedAnswer(index);
     }
   };
 
@@ -38,9 +49,12 @@ function Testing() {
         <Game
           step={step}
           question={question}
-          onClickVariant={onClickVariant}
           length={questions.length}
           themeName={state.themeName}
+          onClickVariant={onClickVariant}
+          onNext={onNext}
+          onSelected={onSelected}
+          selectedAnswer={selectedAnswer}
         />
       ) : (
         <Result restart={restart} correct={correct} length={questions.length} />
