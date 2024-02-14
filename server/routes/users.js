@@ -159,4 +159,20 @@ router.get("/top", async (req, res) => {
   }
 });
 
+router.get("/currentUser", verifyToken, async (req, res) => {
+  try {
+    const userId = req.userId;
+    const user = await User.findById(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user);
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ message: `Internal Server Error${error}` });
+  }
+});
+
 module.exports = router;
