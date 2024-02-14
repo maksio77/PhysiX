@@ -6,6 +6,7 @@ import Spinner from "../../components/Spinner";
 import { searchInputText } from "../../utils/searchInputText";
 import { SectionContext } from "../../components/SectionContext";
 import usePhysixService from "../../services/PhysixService";
+import { MdSignalWifiConnectedNoInternet4 } from "react-icons/md";
 
 const Main = () => {
   const { sections, error, loading } = useContext(SectionContext);
@@ -16,12 +17,26 @@ const Main = () => {
   const [themes, setThemes] = useState({});
   const [openTheme, setOpenTheme] = useState("");
   const [tableData, setTableData] = useState([]);
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    function handleNetworkChange() {
+      setIsOnline(navigator.onLine);
+    }
+
+    window.addEventListener("online", handleNetworkChange);
+    window.addEventListener("offline", handleNetworkChange);
+
+    return () => {
+      window.removeEventListener("online", handleNetworkChange);
+      window.removeEventListener("offline", handleNetworkChange);
+    };
+  }, []);
 
   const getTable = useCallback(async () => {
     try {
       const res = await getTopTen();
       setTableData(res);
-      console.log(res);
     } catch (error) {
       console.error("Error fetching favorite tests:", error);
     }
@@ -74,36 +89,47 @@ const Main = () => {
   const content =
     sections.length !== 0 ? (
       <>
-        <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-24 mb-4 relative w-full">
-          <table className="table-auto w-full">
-            <thead>
-              <tr className="bg-gray-200 text-gray-700">
-                <th className="py-3 px-4 text-left text-lg font-medium">
-                  Користувач
-                </th>
-                <th className="py-3 px-4 text-right text-lg font-medium">
-                  Кількість очок
-                </th>
-              </tr>
-            </thead>
-          </table>
-          <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mb-4 relative w-full h-40 overflow-y-auto">
+        {isOnline ? (
+          <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-24 mb-4 relative w-full">
             <table className="table-auto w-full">
-              <tbody>
-                {tableData.map((item, index) => (
-                  <tr key={index} className="border-b border-gray-200">
-                    <td className="py-3 px-4 text-left text-base">
-                      {item.firstName} {item.lastName}
-                    </td>
-                    <td className="py-3 px-4 text-right text-base">
-                      {item.points}
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
+              <thead>
+                <tr className="bg-gray-200 text-gray-700">
+                  <th className="py-3 px-4 text-left text-lg font-medium">
+                    Користувач
+                  </th>
+                  <th className="py-3 px-4 text-right text-lg font-medium">
+                    Кількість очок
+                  </th>
+                </tr>
+              </thead>
             </table>
+            <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mb-4 relative w-full h-40 overflow-y-auto">
+              <table className="table-auto w-full">
+                <tbody>
+                  {tableData.map((item, index) => (
+                    <tr key={index} className="border-b border-gray-200">
+                      <td className="py-3 px-4 text-left text-base">
+                        {item.firstName} {item.lastName}
+                      </td>
+                      <td className="py-3 px-4 text-right text-base">
+                        {item.points}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center text-primary mt-24 mb-2">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-4 text-center">
+              Немає з'єднання з мережею
+            </h2>
+            <div className="flex items-center justify-center bg-primary rounded-full p-4">
+              <MdSignalWifiConnectedNoInternet4 size={60} color="#fff" />
+            </div>
+          </div>
+        )}
 
         <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-4 mb-4 relative w-full">
           <SearchInput
