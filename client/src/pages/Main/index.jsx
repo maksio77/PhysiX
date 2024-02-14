@@ -1,18 +1,35 @@
-import { useContext, useState, useRef, useEffect } from "react";
+import { useContext, useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import SearchInput from "../../components/SearchInput";
 import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
 import { searchInputText } from "../../utils/searchInputText";
 import { SectionContext } from "../../components/SectionContext";
+import usePhysixService from "../../services/PhysixService";
 
 const Main = () => {
   const { sections, error, loading } = useContext(SectionContext);
+  const { getTopTen } = usePhysixService();
 
   const [searchResults, setSearchResults] = useState([]);
   const [inputText, setInputText] = useState("");
   const [themes, setThemes] = useState({});
   const [openTheme, setOpenTheme] = useState("");
+  const [tableData, setTableData] = useState([]);
+
+  const getTable = useCallback(async () => {
+    try {
+      const res = await getTopTen();
+      setTableData(res);
+      console.log(res);
+    } catch (error) {
+      console.error("Error fetching favorite tests:", error);
+    }
+  }, []);
+
+  useEffect(() => {
+    getTable();
+  }, [getTable]);
 
   const dropdownRef = useRef(null);
   const buttonRef = useRef(null);
@@ -58,6 +75,37 @@ const Main = () => {
     sections.length !== 0 ? (
       <>
         <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-24 mb-4 relative w-full">
+          <table className="table-auto w-full">
+            <thead>
+              <tr className="bg-gray-200 text-gray-700">
+                <th className="py-3 px-4 text-left text-lg font-medium">
+                  Користувач
+                </th>
+                <th className="py-3 px-4 text-right text-lg font-medium">
+                  Кількість очок
+                </th>
+              </tr>
+            </thead>
+          </table>
+          <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mb-4 relative w-full h-40 overflow-y-auto">
+            <table className="table-auto w-full">
+              <tbody>
+                {tableData.map((item, index) => (
+                  <tr key={index} className="border-b border-gray-200">
+                    <td className="py-3 px-4 text-left text-base">
+                      {item.firstName} {item.lastName}
+                    </td>
+                    <td className="py-3 px-4 text-right text-base">
+                      {item.points}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-4 mb-4 relative w-full">
           <SearchInput
             inputText={inputText}
             handleSearchChange={handleSearchChange}

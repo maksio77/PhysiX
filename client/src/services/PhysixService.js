@@ -14,6 +14,11 @@ const usePhysixService = () => {
     return res;
   };
 
+  const getTopTen = async () => {
+    const res = await request("users/top");
+    return res;
+  };
+
   const addPoints = useCallback(
     async (points, token) => {
       const headers = {
@@ -83,6 +88,7 @@ const usePhysixService = () => {
     addFavoriteTest,
     removeFavoriteTest,
     getFavoriteTestIDS,
+    getTopTen
   };
 };
 
