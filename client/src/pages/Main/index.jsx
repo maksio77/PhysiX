@@ -40,7 +40,7 @@ const Main = () => {
     } catch (error) {
       console.error("Error fetching favorite tests:", error);
     }
-  }, []);
+  }, [isOnline]);
 
   useEffect(() => {
     getTable();
