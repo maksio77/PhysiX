@@ -1,12 +1,15 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { UserContext } from "../UserContext";
 import { TfiMenu } from "react-icons/tfi";
 import { FaRobot } from "react-icons/fa6";
 import { FaNoteSticky } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
+import Spinner from "../Spinner";
 
 const Header = () => {
+  const { user, loading } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleLogout = () => {
@@ -47,8 +50,12 @@ const Header = () => {
         </h1>
       </Link>
       <div className="flex items-center">
-        <p className="sm:text-sm lg:text-lg text-white mr-2 hidden sm:block">
-          Ім'я користувача
+        <p className="sm:text-sm lg:text-lg text-secondary mr-2 hidden sm:block">
+          {!user || loading ? (
+            <Spinner size={20} />
+          ) : (
+            `${user.firstName} ${user.lastName}`
+          )}
         </p>
         <button
           onClick={handleLogout}

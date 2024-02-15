@@ -78,6 +78,17 @@ const usePhysixService = () => {
     [request]
   );
 
+  const getCurrentUser = useCallback(
+    async (token) => {
+      const headers = {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      };
+      return await request(`users/currentUser`, "GET", null, headers);
+    },
+    [request]
+  );
+
   return {
     loading,
     error,
@@ -88,7 +99,8 @@ const usePhysixService = () => {
     addFavoriteTest,
     removeFavoriteTest,
     getFavoriteTestIDS,
-    getTopTen
+    getTopTen,
+    getCurrentUser,
   };
 };
 
