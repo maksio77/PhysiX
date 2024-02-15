@@ -149,8 +149,8 @@ router.get("/top", async (req, res) => {
   try {
     const users = await User.find().sort({ points: -1 }).limit(10);
     const topUsers = users.map((user) => {
-      const { firstName, lastName, points } = user;
-      return { firstName, lastName, points };
+      const { _id, firstName, lastName, points } = user;
+      return { _id, firstName, lastName, points };
     });
     res.json(topUsers);
   } catch (err) {
@@ -162,7 +162,9 @@ router.get("/top", async (req, res) => {
 router.get("/currentUser", verifyToken, async (req, res) => {
   try {
     const userId = req.userId;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).select(
+      "_id firstName lastName favoriteTests"
+    );
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
