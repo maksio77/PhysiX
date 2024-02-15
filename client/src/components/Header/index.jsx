@@ -6,6 +6,7 @@ import { FaRobot } from "react-icons/fa6";
 import { FaNoteSticky } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
+import { FaUserCircle } from "react-icons/fa";
 import Spinner from "../Spinner";
 
 const Header = () => {
@@ -50,13 +51,16 @@ const Header = () => {
         </h1>
       </Link>
       <div className="flex items-center">
-        <p className="sm:text-sm lg:text-lg text-secondary mr-2 hidden sm:block">
-          {!user || loading ? (
-            <Spinner size={20} />
-          ) : (
-            `${user.firstName} ${user.lastName}`
-          )}
-        </p>
+        <div className="flex items-center">
+          <FaUserCircle className="sm:text-sm lg:text-lg text-secondary mr-1 hidden sm:block" />
+          <p className="sm:text-sm lg:text-lg text-secondary mr-2 hidden sm:block">
+            {!user || loading ? (
+              <Spinner size={20} />
+            ) : (
+              `${user.firstName} ${user.lastName}`
+            )}
+          </p>
+        </div>
         <button
           onClick={handleLogout}
           className="bg-white lg:text-xl sm: text-sm text-primary px-4 py-2 rounded hover:bg-secondary"
