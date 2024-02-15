@@ -163,7 +163,7 @@ router.get("/currentUser", verifyToken, async (req, res) => {
   try {
     const userId = req.userId;
     const user = await User.findById(userId).select(
-      "_id firstName lastName favoriteTests"
+      "_id firstName lastName"
     );
 
     if (!user) {
