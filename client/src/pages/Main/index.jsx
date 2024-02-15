@@ -6,9 +6,11 @@ import Spinner from "../../components/Spinner";
 import { searchInputText } from "../../utils/searchInputText";
 import { SectionContext } from "../../components/SectionContext";
 import usePhysixService from "../../services/PhysixService";
+import { UserContext } from "../../components/UserContext";
 import { MdSignalWifiConnectedNoInternet4 } from "react-icons/md";
 
 const Main = () => {
+  const { user } = useContext(UserContext);
   const { sections, error, loading } = useContext(SectionContext);
   const { getTopTen } = usePhysixService();
 
@@ -107,7 +109,12 @@ const Main = () => {
               <table className="table-auto w-full">
                 <tbody>
                   {tableData.map((item, index) => (
-                    <tr key={index} className="border-b border-gray-200">
+                    <tr
+                      key={index}
+                      className={`border-b border-gray-200 ${
+                        item._id === user._id ? "bg-slate-300 shadow-md" : ""
+                      }`}
+                    >
                       <td className="py-3 px-4 text-left text-base">
                         {item.firstName} {item.lastName}
                       </td>
