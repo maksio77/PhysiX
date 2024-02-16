@@ -32,6 +32,10 @@ const userSchema = new mongoose.Schema({
     type: [Object],
     default: [],
   },
+  favoriteArticles: {
+    type: [Object],
+    default: [],
+  },
 });
 
 userSchema.methods.generateAuthToken = function () {
