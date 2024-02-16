@@ -78,6 +78,49 @@ const usePhysixService = () => {
     [request]
   );
 
+  const addFavoriteArticle = useCallback(
+    async (article, token) => {
+      const headers = {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      };
+      return await request(
+        `users/addFavoriteArticle`,
+        "POST",
+        JSON.stringify({ article }),
+        headers
+      );
+    },
+    [request]
+  );
+
+  const removeFavoriteArticle = useCallback(
+    async (articleId, token) => {
+      const headers = {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      };
+      return await request(
+        `users/removeFavoriteArticle`,
+        "POST",
+        JSON.stringify({ articleId }),
+        headers
+      );
+    },
+    [request]
+  );
+
+  const getFavoriteArticlesIDS = useCallback(
+    async (token) => {
+      const headers = {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      };
+      return await request(`users/favoriteArticlesIDS`, "GET", null, headers);
+    },
+    [request]
+  );
+
   const getCurrentUser = useCallback(
     async (token) => {
       const headers = {
@@ -101,6 +144,9 @@ const usePhysixService = () => {
     getFavoriteTestIDS,
     getTopTen,
     getCurrentUser,
+    addFavoriteArticle,
+    removeFavoriteArticle,
+    getFavoriteArticlesIDS,
   };
 };
 
