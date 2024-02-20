@@ -3,7 +3,7 @@ import usePhysixService from "../../services/PhysixService";
 import ErrorMessage from "../ErrorMessage";
 import Spinner from "../Spinner";
 
-function Result({ correct, restart, length }) {
+function Result({ correct, restart, length, backRoute }) {
   const token = localStorage.getItem("token");
   const { addPoints, error, loading } = usePhysixService();
 
@@ -33,11 +33,11 @@ function Result({ correct, restart, length }) {
         Спробувати ще раз
       </button>
       <Link
-        to={`/tests`}
+        to={`${backRoute.link}`}
         className="mt-4 px-8 py-2 text-white bg-primary rounded hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out"
         onClick={handleFinish}
       >
-        Обрати тему
+        {backRoute.routeText}
       </Link>
     </>
   );

@@ -115,7 +115,7 @@ const Header = () => {
             </button>
           </Link>
           <Link
-            to={"/favourites"}
+            to={"/favorite"}
             style={{ textDecoration: "none", width: "100%" }}
           >
             <button

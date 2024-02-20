@@ -47,6 +47,7 @@ function Testing() {
     <div className="flex min-h-[91vh] flex-col max-w-screen justify-center bg-secondary">
       {step !== questions.length ? (
         <Game
+          backRoute={state.backRoute}
           step={step}
           question={question}
           length={questions.length}
@@ -57,7 +58,7 @@ function Testing() {
           selectedAnswer={selectedAnswer}
         />
       ) : (
-        <Result restart={restart} correct={correct} length={questions.length} />
+        <Result restart={restart} correct={correct} length={questions.length} backRoute={state.backRoute}/>
       )}
     </div>
   );

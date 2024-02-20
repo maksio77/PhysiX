@@ -15,6 +15,7 @@ const Game = ({
   onClickVariant,
   onNext,
   onSelected,
+  backRoute,
 }) => {
   const token = localStorage.getItem("token");
   const {
@@ -85,10 +86,10 @@ const Game = ({
       </h1>
       <div className="flex justify-between mx-4 sm:mx-8 md:mx-16 lg:mx-32 xl:mx-64 2xl:mx-96 mb-4">
         <Link
-          to={`/tests`}
+          to={`${backRoute.link}`}
           className="text-sm sm:text-base shadow md:text-lg lg:text-lg xl:text-lg 2xl:text-lg mt-4 bg-primary text-white hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out p-2 text-left rounded-md mb-4"
         >
-          Обрати тему
+          {backRoute.routeText}
         </Link>
 
         <button className="mt-4 bg-white shadow hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out text-primary sm:text-base p-2 text-right rounded-md mb-4">

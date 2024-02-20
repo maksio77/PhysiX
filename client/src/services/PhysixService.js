@@ -116,7 +116,12 @@ const usePhysixService = () => {
         "Content-Type": "application/json",
         "x-access-token": token,
       };
-      return await request(`sections/favoriteArticlesIDS`, "GET", null, headers);
+      return await request(
+        `sections/favoriteArticlesIDS`,
+        "GET",
+        null,
+        headers
+      );
     },
     [request]
   );
@@ -128,6 +133,17 @@ const usePhysixService = () => {
         "x-access-token": token,
       };
       return await request(`users/currentUser`, "GET", null, headers);
+    },
+    [request]
+  );
+
+  const getFavoriteItems = useCallback(
+    async (token) => {
+      const headers = {
+        "Content-Type": "application/json",
+        "x-access-token": token,
+      };
+      return await request(`users/userFavoriteItems`, "GET", null, headers);
     },
     [request]
   );
@@ -147,6 +163,7 @@ const usePhysixService = () => {
     addFavoriteArticle,
     removeFavoriteArticle,
     getFavoriteArticlesIDS,
+    getFavoriteItems
   };
 };
 

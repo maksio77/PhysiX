@@ -65,7 +65,14 @@ export default function TestThemes() {
                           >
                             <Link
                               to={`/tests/${theme.themeRoute}`}
-                              state={{ tests: theme.tests, themeName: theme.themeName }}
+                              state={{
+                                tests: theme.tests,
+                                themeName: theme.themeName,
+                                backRoute: {
+                                  link: "/tests",
+                                  routeText: "Обрати тему",
+                                },
+                              }}
                             >
                               {theme.themeName}
                             </Link>
