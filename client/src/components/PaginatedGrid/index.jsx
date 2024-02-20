@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import usePhysixService from "../../services/PhysixService";
 import { GrLinkNext } from "react-icons/gr";
 import { GrLinkPrevious } from "react-icons/gr";
 import ArticleItem from "../ArticleItem";
@@ -7,9 +8,14 @@ import ArticleItem from "../ArticleItem";
 const itemsPerPage = 6;
 
 const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
+  const token = localStorage.getItem("token");
+
   let navigate = useNavigate();
   let { page, section } = useParams();
   const pagesCount = theme.info.length / itemsPerPage;
+
+  const { getFavoriteArticlesIDS } = usePhysixService();
+  const [favoriteArticles, setFavoriteArticles] = useState([]);
 
   const [currentPage, setCurrentPage] = useState(parseInt(page));
   const [isActive, setIsActive] = useState(true);
@@ -37,6 +43,19 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
     };
   }, []);
 
+  const getFavorite = useCallback(async () => {
+    try {
+      const res = await getFavoriteArticlesIDS(token);
+      setFavoriteArticles(res);
+    } catch (error) {
+      console.error("Error fetching favorite tests:", error);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    getFavorite();
+  }, [getFavorite]);
+
   const handleClickNext = () => {
     if (pagesCount > currentPage) {
       setCurrentPage(currentPage + 1);
@@ -63,6 +82,8 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
               item={item}
               searchPhrase={searchPhrase}
               isActive={isActive}
+              getFavorite={getFavorite}
+              favoriteArticles={favoriteArticles}
             />
           </div>
         ))}

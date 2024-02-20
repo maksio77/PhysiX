@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+//import { useState, useEffect, useCallback } from "react";
 import { replaceUnderscores } from "../../utils/repleceUnderscores";
 import usePhysixService from "../../services/PhysixService";
 import { FaRegStar } from "react-icons/fa";
@@ -6,30 +6,14 @@ import { FaStar } from "react-icons/fa";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 
-const ArticleItem = ({ item, searchPhrase, isActive }) => {
+const ArticleItem = ({ item, searchPhrase, isActive, getFavorite, favoriteArticles }) => {
   const token = localStorage.getItem("token");
   const {
     loading,
     error,
     addFavoriteArticle,
     removeFavoriteArticle,
-    getFavoriteArticlesIDS,
   } = usePhysixService();
-
-  const [favoriteArticles, setFavoriteArticles] = useState([]);
-
-  const getFavorite = useCallback(async () => {
-    try {
-      const res = await getFavoriteArticlesIDS(token);
-      setFavoriteArticles(res);
-    } catch (error) {
-      console.error("Error fetching favorite tests:", error);
-    }
-  }, [token]);
-
-  useEffect(() => {
-    getFavorite();
-  }, [getFavorite]);
 
   const handleAddFavorite = async (article) => {
     try {
