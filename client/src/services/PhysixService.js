@@ -42,7 +42,7 @@ const usePhysixService = () => {
         "x-access-token": token,
       };
       return await request(
-        `users/addFavoriteTest`,
+        `tests/addFavoriteTest`,
         "POST",
         JSON.stringify({ test }),
         headers
@@ -58,7 +58,7 @@ const usePhysixService = () => {
         "x-access-token": token,
       };
       return await request(
-        `users/removeFavoriteTest`,
+        `tests/removeFavoriteTest`,
         "POST",
         JSON.stringify({ testId }),
         headers
@@ -73,7 +73,7 @@ const usePhysixService = () => {
         "Content-Type": "application/json",
         "x-access-token": token,
       };
-      return await request(`users/favoriteTestsIDS`, "GET", null, headers);
+      return await request(`tests/favoriteTestsIDS`, "GET", null, headers);
     },
     [request]
   );
@@ -85,7 +85,7 @@ const usePhysixService = () => {
         "x-access-token": token,
       };
       return await request(
-        `users/addFavoriteArticle`,
+        `sections/addFavoriteArticle`,
         "POST",
         JSON.stringify({ article }),
         headers
@@ -101,7 +101,7 @@ const usePhysixService = () => {
         "x-access-token": token,
       };
       return await request(
-        `users/removeFavoriteArticle`,
+        `sections/removeFavoriteArticle`,
         "POST",
         JSON.stringify({ articleId }),
         headers
@@ -116,7 +116,7 @@ const usePhysixService = () => {
         "Content-Type": "application/json",
         "x-access-token": token,
       };
-      return await request(`users/favoriteArticlesIDS`, "GET", null, headers);
+      return await request(`sections/favoriteArticlesIDS`, "GET", null, headers);
     },
     [request]
   );
