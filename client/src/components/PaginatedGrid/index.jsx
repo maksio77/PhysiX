@@ -56,13 +56,15 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 m-2 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 my-4 w-full">
         {paginatedItems.map((item) => (
-          <ArticleItem
-            item={item}
-            searchPhrase={searchPhrase}
-            isActive={isActive}
-          />
+          <div className="grid gap-4  w-full" key={item._id}>
+            <ArticleItem
+              item={item}
+              searchPhrase={searchPhrase}
+              isActive={isActive}
+            />
+          </div>
         ))}
       </div>
       <div className="flex justify-between mb-4">

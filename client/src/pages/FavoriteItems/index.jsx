@@ -14,7 +14,6 @@ const FavoriteItems = () => {
     try {
       const res = await getFavoriteItems(token);
       setItems(res);
-      console.log(res);
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
