@@ -14,6 +14,7 @@ import Footer from "./components/Footer";
 import TestThemes from "./pages/TestThemes";
 import Testing from "./pages/Testing";
 import FavoriteItems from "./pages/FavoriteItems";
+import FavoriteMaterials from "./pages/FavoriteMaterials";
 
 function App() {
   const user = localStorage.getItem("token");
@@ -28,6 +29,7 @@ function App() {
           {user && <Route path="/tests" exact element={<TestThemes />} />}
           {user && <Route path="/tests/:theme" exact element={<Testing />} />}
           {user && <Route path="/favorite" exact element={<FavoriteItems/>} />}
+          {user && <Route path="/sections/:section/materials/:page" exact element={<FavoriteMaterials/>} />}
           {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />

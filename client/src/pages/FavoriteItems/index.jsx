@@ -46,7 +46,7 @@ const FavoriteItems = () => {
               title={items.favoriteTests.length === 0 ? "ТЕСТИ ВІДСУТНІ" : ""}
             >
               <Link
-                to={`/tests/favTests`}
+                to={`/tests/favoriteTests`}
                 state={{
                   tests: items.favoriteTests,
                   themeName: "Обрані Тести",
@@ -81,7 +81,8 @@ const FavoriteItems = () => {
               }
             >
               <Link
-                //to={`/sections/${param.section}/${theme.themeRoute}`}
+                to={`/sections/favorite/materials/1`}
+                state={{ theme: items.favoriteArticles }}
                 style={{
                   alignSelf: "flex-start",
                   textDecoration: "none",
