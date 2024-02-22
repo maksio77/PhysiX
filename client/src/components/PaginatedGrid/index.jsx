@@ -75,9 +75,9 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 my-4 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 my-4 mx-2">
         {paginatedItems.map((item) => (
-          <div className="grid gap-4  w-full" key={item._id}>
+          <div className="grid gap-4 w-full" key={item._id}>
             <ArticleItem
               item={item}
               searchPhrase={searchPhrase}
@@ -92,8 +92,8 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
         <button
           className={`flex items-center w-1/2 px-2 border-2 border-secondary rounded-md ${
             currentPage !== 1
-              ? "text-white bg-primary hover:bg-secondary hover:text-primary"
-              : "bg-secondary text-primary cursor-default"
+              ? "text-white bg-primary hover:opacity-80"
+              : "opacity-50 cursor-not-allowed"
           }`}
           onClick={handleClickPrev}
         >
@@ -104,8 +104,8 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
         <button
           className={`flex items-center w-1/2 px-2 border-2 border-secondary rounded-md ${
             pagesCount > currentPage
-              ? "text-white bg-primary hover:bg-secondary hover:text-primary"
-              : "bg-secondary text-primary cursor-default"
+              ? "text-white bg-primary hover:opacity-80"
+              : "opacity-50 cursor-not-allowed"
           }`}
           onClick={handleClickNext}
         >
