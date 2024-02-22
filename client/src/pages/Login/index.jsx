@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import logo from '../../images/logo192.png'
+import logo from "../../images/logo192.png";
 
 const Login = () => {
   const [data, setData] = useState({
@@ -35,60 +35,75 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen flex-col sm: w-auto bg-secondary">
-      <img src={logo} alt={'LOGO'} className='scale-50 p-0'/>
-      <div className='flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl p-4 sm:p-14'>
-        <div className="justify-center bg-primary rounded-xl flex p-4 flex-col mb-4 w-full sm:w-auto">
-          <form className='flex flex-col mx-auto' onSubmit={handleSubmit}>
-            {/*<FaRegUser color='white'/>*/}
-            <h1 className='mx-auto text-4xl justify-center flex mb-5 text-white sm: text-2xl'>Login to Your
-              Account</h1>
-            <div className='flex sm: ml-10'>
-              <MdOutlineEmail color='white' size={25} className='flex m-3 mx-auto justify-center'/>
+    <div className="flex justify-center items-center min-h-screen flex-col bg-secondary">
+      <img src={logo} alt="LOGO" className=" sm: w-24 lg:w-36 " />
+      <div className="flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl p-4 sm:p-14 mb-2 mx-2 w-full sm:max-w-3xl">
+        <div className="justify-center bg-primary rounded-xl flex p-4 flex-col mb-4 w-full sm:w-1/2 lg:w-2/3 xl:w-3/4">
+          <form className="flex flex-col mx-auto" onSubmit={handleSubmit}>
+            <h1 className="mx-auto sm: text-2xl lg:text-4xl justify-center flex mb-5 text-white ">
+              Увійдіть до свого облікового запису
+            </h1>
+            <div className="flex sm:ml-10 items-center">
+              <MdOutlineEmail color="white" size={30} className="mr-3" />
               <input
-                  type="text"
-                  placeholder="Email"
-                  name="email"
-                  onChange={handleChange}
-                  value={data.email}
-                  required
-                  className='bg-secondary outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5 sm: w-64'
-              ></input>
+                type="text"
+                placeholder="Email"
+                name="email"
+                onChange={handleChange}
+                value={data.email}
+                required
+                className="bg-secondary outline-none rounded-md p-3 mb-1 w-full"
+                style={{ maxWidth: "100%" }}
+              />
             </div>
-            <div className='flex sm: ml-10'>
-              <RiLockPasswordLine color='white' size={25} className='flex m-3 mx-auto justify-center'/>
+            <div className="flex sm:ml-10 items-center">
+              <RiLockPasswordLine color="white" size={30} className="mr-3" />
               <input
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  onChange={handleChange}
-                  value={data.password}
-                  required
-                  className='bg-secondary outline-0 rounded-md p-3 w-96 mb-1.5 ml-1.5 sm: w-64 mx-auto'
-              ></input>
+                type="password"
+                placeholder="Пароль"
+                name="password"
+                onChange={handleChange}
+                value={data.password}
+                required
+                className="bg-secondary outline-none rounded-md p-3 w-full"
+                style={{ maxWidth: "100%" }}
+              />
             </div>
             <Link
-                to="/forgot-password"
-                style={{
-                  alignSelf: "flex-start",
-                  textDecoration: "none",
-                  color: "white",
-                }}
-                className='sm: ml-10'
+              to="/forgot-password"
+              style={{
+                alignSelf: "flex-start",
+                textDecoration: "none",
+                color: "white",
+                marginLeft: "1.5rem",
+                marginTop: "0.5rem"
+              }}
             >
-              <p style={{padding: "0 15px"}}>Forgot Password?</p>
+              Забув пароль?
             </Link>
-            {error && <div className='bg-red-400 mx-auto w-96 rounded-md p-2 mt-1'>{error}</div>}
-            <button type="submit" className="text-xl bg-white text-black rounded-xl p-2 m-3 mx-auto">
-              Sign In
+            {error && (
+              <div className="bg-red-400 mx-auto w-full sm:w-80 rounded-md p-2 mt-1">
+                {error}
+              </div>
+            )}
+            <button
+              type="submit"
+              className="text-xl bg-white text-black rounded-xl p-2 m-3 mx-auto"
+            >
+              Увійти
             </button>
           </form>
         </div>
-        <div className='flex flex-col mx-auto justify-center p-20'>
-          <h1 className='mx-auto text-4xl justify-center flex mb-5'>New Here?</h1>
+        <div className="flex flex-col mx-auto justify-center p-4 w-full sm:w-1/2 lg:w-1/3 xl:w-1/4">
+          <h1 className="mx-auto sm: text-2xl lg:text-4xl justify-center flex mb-5">
+            Новачок?
+          </h1>
           <Link to="/signup">
-            <button type="button" className="text-xl bg-primary text-white rounded-xl p-2 m-3 mx-auto flex">
-              Sign Up
+            <button
+              type="button"
+              className="text-xl bg-primary text-white justify-center rounded-xl p-2 mx-auto flex"
+            >
+              Зареєструватися
             </button>
           </Link>
         </div>
