@@ -37,7 +37,7 @@ const Login = () => {
   return (
     <div className="flex justify-center items-center min-h-screen flex-col bg-secondary">
       <img src={logo} alt="LOGO" className=" sm: w-24 lg:w-36 " />
-      <div className="flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl p-4 sm:p-14 mb-2 mx-2 w-full sm:max-w-3xl">
+      <div className="flex flex-col sm:flex-row bg-white border-gray-100 shadow-xl rounded-xl p-4 sm:p-14 mb-2 mx-1 sm:max-w-3xl">
         <div className="justify-center bg-primary rounded-xl flex p-4 flex-col mb-4 w-full sm:w-1/2 lg:w-2/3 xl:w-3/4">
           <form className="flex flex-col mx-auto" onSubmit={handleSubmit}>
             <h1 className="mx-auto sm: text-2xl lg:text-4xl justify-center flex mb-5 text-white ">
@@ -76,7 +76,7 @@ const Login = () => {
                 textDecoration: "none",
                 color: "white",
                 marginLeft: "1.5rem",
-                marginTop: "0.5rem"
+                marginTop: "0.5rem",
               }}
             >
               Забув пароль?

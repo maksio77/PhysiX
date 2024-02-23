@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import success from "../../images/success.png";
 import styles from "./styles.module.css";
+import Page404 from "../404";
 
 const EmailVerify = () => {
   const [validUrl, setValidUrl] = useState(true);
@@ -28,13 +29,13 @@ const EmailVerify = () => {
       {validUrl ? (
         <div className={styles.container}>
           <img src={success} alt="success_img" className={styles.success_img} />
-          <h1>Email verified successfully</h1>
+          <h1>Email верифіковано успішно</h1>
           <Link to="/login">
-            <button className={styles.green_btn}>Login</button>
+            <button className={styles.green_btn}>Увійти</button>
           </Link>
         </div>
       ) : (
-        <h1>404 Not Found</h1>
+        <Page404 />
       )}
     </>
   );
