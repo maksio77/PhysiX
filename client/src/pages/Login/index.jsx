@@ -4,13 +4,16 @@ import axios from "axios";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import logo from "../../images/logo192.png";
+import Spinner from "../../components/Spinner";
 
 const Login = () => {
   const [data, setData] = useState({
     email: "",
     password: "",
   });
+
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -18,6 +21,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError("");
     try {
       const url = "http://localhost:4000/api/auth";
       const { data: res } = await axios.post(url, data);
@@ -31,6 +36,8 @@ const Login = () => {
       ) {
         setError(error.response.data.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -81,9 +88,17 @@ const Login = () => {
             >
               Забув пароль?
             </Link>
-            {error && (
-              <div className="bg-red-400 mx-auto w-full sm:w-80 rounded-md p-2 mt-1">
-                {error}
+            {!loading ? (
+              <>
+                {error && (
+                  <div className="bg-red-400 mx-auto w-full sm:w-80 rounded-md p-2 mt-1">
+                    {error}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="mx-auto flex items-center mt-4">
+                <Spinner size={30} />
               </div>
             )}
             <button

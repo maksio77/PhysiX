@@ -5,6 +5,7 @@ import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";
 import logo from "../../images/logo192.png";
+import Spinner from "../../components/Spinner";
 
 const Signup = () => {
   const [data, setData] = useState({
@@ -15,6 +16,7 @@ const Signup = () => {
   });
   const [error, setError] = useState("");
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -23,6 +25,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setLoading(true);
     try {
       const url = "http://localhost:4000/api/users";
       const { data: res } = await axios.post(url, data);
@@ -41,6 +44,8 @@ const Signup = () => {
       ) {
         setError(error.response.data.message);
       }
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -105,13 +110,23 @@ const Signup = () => {
                 style={{ maxWidth: "100%" }}
               />
             </div>
-            {error && (
-              <div className="bg-red-400 mx-auto w-full sm:w-80 rounded-md p-2 mt-1">
-                {error}
+            {!loading ? (
+              <>
+                {error && (
+                  <div className="bg-red-400 mx-auto w-full sm:w-80 rounded-md p-2 mt-1">
+                    {error}
+                  </div>
+                )}
+                {msg && (
+                  <div className="bg-green-400 mx-auto rounded-md p-2">
+                    {msg}
+                  </div>
+                )}
+              </>
+            ) : (
+              <div className="mx-auto flex items-center mt-4">
+                <Spinner size={30} />
               </div>
-            )}
-            {msg && (
-              <div className="bg-green-400 mx-auto rounded-md p-2">{msg}</div>
             )}
             <button
               type="submit"
