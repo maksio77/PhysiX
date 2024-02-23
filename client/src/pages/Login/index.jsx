@@ -43,7 +43,7 @@ const Login = () => {
             <h1 className="mx-auto sm: text-2xl lg:text-4xl justify-center flex mb-5 text-white ">
               Увійдіть до свого облікового запису
             </h1>
-            <div className="flex sm:ml-10 items-center">
+            <div className="flex items-center">
               <MdOutlineEmail color="white" size={30} className="mr-3" />
               <input
                 type="text"
@@ -56,7 +56,7 @@ const Login = () => {
                 style={{ maxWidth: "100%" }}
               />
             </div>
-            <div className="flex sm:ml-10 items-center">
+            <div className="flex items-center">
               <RiLockPasswordLine color="white" size={30} className="mr-3" />
               <input
                 type="password"
@@ -75,7 +75,7 @@ const Login = () => {
                 alignSelf: "flex-start",
                 textDecoration: "none",
                 color: "white",
-                marginLeft: "1.5rem",
+                marginLeft: "2.5rem",
                 marginTop: "0.5rem",
               }}
             >
@@ -88,7 +88,7 @@ const Login = () => {
             )}
             <button
               type="submit"
-              className="text-xl bg-white text-black rounded-xl p-2 m-3 mx-auto"
+              className="text-xl hover:opacity-85 hover:shadow-sm  bg-white text-black rounded-xl p-2 m-3 mx-auto"
             >
               Увійти
             </button>
@@ -101,7 +101,7 @@ const Login = () => {
           <Link to="/signup">
             <button
               type="button"
-              className="text-xl bg-primary text-white justify-center rounded-xl p-2 mx-auto flex"
+              className="text-xl hover:opacity-85 hover:shadow-sm  bg-primary text-white justify-center rounded-xl p-2 mx-auto flex"
             >
               Зареєструватися
             </button>
