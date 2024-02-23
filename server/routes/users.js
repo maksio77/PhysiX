@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     if (user)
       return res
         .status(409)
-        .send({ message: "User with given email already Exist!" });
+        .send({ message: "Користувач з таким email вже існує!" });
 
     const salt = await bcrypt.genSalt(Number(process.env.SALT));
     const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -33,7 +33,7 @@ router.post("/", async (req, res) => {
 
     res
       .status(201)
-      .send({ message: "An Email sent to your account please verify" });
+      .send({ message: "На вказаний email надіслано повідомлення, будь ласка, підтвердіть email" });
   } catch (error) {
     console.log(error);
     res.status(500).send({ message: `Internal Server Error${error}` });
@@ -54,7 +54,7 @@ router.get("/:id/verify/:token/", async (req, res) => {
     await user.updateOne({ verified: true });
     deleteToken(token);
 
-    res.status(200).send({ message: "Email verified successfully" });
+    res.status(200).send({ message: "Email успішно підтверджено" });
   } catch (error) {
     res.status(500).send({ message: `Internal Server Error${error}` });
   }

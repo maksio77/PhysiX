@@ -15,14 +15,14 @@ router.post("/", async (req, res) => {
     const user = await User.findOne({ email: req.body.email });
 
     if (!user)
-      return res.status(401).send({ message: "Invalid Email or Password" });
+      return res.status(401).send({ message: "Некоректний email або пароль" });
 
     const validPassword = await bcrypt.compare(
       req.body.password,
       user.password
     );
     if (!validPassword)
-      return res.status(401).send({ message: "Invalid Email or Password" });
+      return res.status(401).send({ message: "Некоректний email або пароль" });
 
     if (!user.verified) {
       let token = await Token.findOne({ userId: user._id });
@@ -31,17 +31,17 @@ router.post("/", async (req, res) => {
           userId: user._id,
           token: crypto.randomBytes(32).toString("hex"),
         }).save();
-        const url = `Hello, please follow the link to confirm your email 🔧\n${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
-        await sendEmail(user.email, "Verify Email", url);
+        const url = `Привіт, це твій помічник вивчення фізики, будь ласка, перейди за посилання щоб підтвердити email 🔧\n${process.env.BASE_URL}users/${user.id}/verify/${token.token}`;
+        await sendEmail(user.email, "Підтвердження email", url);
       }
 
       return res
         .status(400)
-        .send({ message: "An Email sent to your account please verify" });
+        .send({ message: "На вказаний email надіслано повідомлення, будь ласка, підтвердіть email" });
     }
 
     const token = user.generateAuthToken();
-    res.status(200).send({ data: token, message: "logged in successfully" });
+    res.status(200).send({ data: token, message: "успішно увійшли в систему" });
   } catch (error) {
     res.status(500).send({ message: "Internal Server Error" });
   }

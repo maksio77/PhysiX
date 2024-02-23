@@ -19,7 +19,7 @@ router.post('/', async (req, res) => {
 
         let user = await User.findOne({ email: req.body.email });
         if (!user)
-            return res.status(409).send({ message: "User with given email does not exist!" });
+            return res.status(409).send({ message: "Користувача з таким email не існує!" });
 
         let token = await Token.findOne({ userId: user._id });
         if (!token) {
@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
         const url = `Привіт, це твій помічник вивчення фізики, будь ласка, перейди за посилання щоб скинути пароль 🔧\n${process.env.BASE_URL}password-reset/${user._id}/${token.token}`;
         await sendEmail(user.email, "PhysiX\nPassword Reset", url);
 
-        res.status(200).send({ message: "password reset link sent to your email account" });
+        res.status(200).send({ message: "посилання для скидання паролю надіслано на вашу електронну пошту" });
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" });
     }
@@ -83,7 +83,7 @@ router.post("/:id/:token", async (req, res) => {
         await user.save();
         deleteToken(token);
 
-        res.status(200).send({ message: "Password reset successfully" });
+        res.status(200).send({ message: "Пароль успішно скинуто" });
     } catch (error) {
         res.status(500).send({ message: "Internal Server Error" });
     }
