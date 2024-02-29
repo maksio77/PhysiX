@@ -93,6 +93,9 @@ const Main = () => {
       <>
         {isOnline ? (
           <div className="flex flex-wrap justify-center items-center gap-4 max-w-screen-xl mx-auto mt-24 mb-4 relative w-full">
+            <h1 className="sm: text-xl lg:text-2xl">
+              Рейтингова таблиця користувачів
+            </h1>
             <table className="table-auto w-full">
               <thead>
                 <tr className="bg-gray-200 text-gray-700">
@@ -100,7 +103,7 @@ const Main = () => {
                     Користувач
                   </th>
                   <th className="py-3 px-4 text-right text-lg font-medium">
-                    Кількість очок
+                    Бали
                   </th>
                 </tr>
               </thead>
