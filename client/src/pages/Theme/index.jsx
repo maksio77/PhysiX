@@ -77,7 +77,7 @@ const Theme = () => {
   const content =
     sections && sections.length > 0 ? (
       <>
-        <h2 className="lg:text-4xl sm: text-xl font-semibold mx-auto mt-24 text-primary">
+        <h2 className="lg:text-4xl sm: text-xl font-semibold mx-2 mt-24 text-primary">
           {sectionName} <GrLinkNext className="inline" /> {theme.themeName}
         </h2>
 
