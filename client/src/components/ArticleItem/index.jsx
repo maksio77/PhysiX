@@ -1,4 +1,3 @@
-//import { useState, useEffect, useCallback } from "react";
 import { replaceUnderscores } from "../../utils/repleceUnderscores";
 import usePhysixService from "../../services/PhysixService";
 import { FaRegStar } from "react-icons/fa";
@@ -6,14 +5,16 @@ import { FaStar } from "react-icons/fa";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
 
-const ArticleItem = ({ item, searchPhrase, isActive, getFavorite, favoriteArticles }) => {
+const ArticleItem = ({
+  item,
+  searchPhrase,
+  isActive,
+  getFavorite,
+  favoriteArticles,
+}) => {
   const token = localStorage.getItem("token");
-  const {
-    loading,
-    error,
-    addFavoriteArticle,
-    removeFavoriteArticle,
-  } = usePhysixService();
+  const { loading, error, addFavoriteArticle, removeFavoriteArticle } =
+    usePhysixService();
 
   const handleAddFavorite = async (article) => {
     try {
@@ -68,6 +69,16 @@ const ArticleItem = ({ item, searchPhrase, isActive, getFavorite, favoriteArticl
         </button>
         <div className="lg:text-xl">
           {replaceUnderscores(item.text, item.formulas)}
+          {item.image && (
+            <div
+              style={{ maxWidth: "90%" }}
+            >
+              <div
+                dangerouslySetInnerHTML={{ __html: item.image }}
+                className="mx-auto"
+              />
+            </div>
+          )}
         </div>
       </div>
     </div>
