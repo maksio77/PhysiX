@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
-import logo from "../../images/logo192.png";
+import logo from "../../images/logo512.png";
 import Spinner from "../../components/Spinner";
 
 const Login = () => {

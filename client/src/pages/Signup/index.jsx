@@ -4,7 +4,7 @@ import axios from "axios";
 import { MdOutlineEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { FaUserCircle } from "react-icons/fa";
-import logo from "../../images/logo192.png";
+import logo from "../../images/logo512.png";
 import Spinner from "../../components/Spinner";
 
 const Signup = () => {
