@@ -75,7 +75,7 @@ function ChartComponent(props, ref) {
         src=
         //"https://phet.colorado.edu/sims/html/geometric-optics-basics/latest/geometric-optics-basics_uk.html"
         "https://phet.colorado.edu/sims/html/energy-skate-park/latest/energy-skate-park_uk.html"
-        className="w-full lg:h-[40rem] xl:h-[63rem] sm: h-[30rem]"
+        className="w-full lg:h-[40rem] xl:h-[68rem] sm: h-[20rem]"
         allowFullScreen
       ></iframe>
     </div>
