@@ -7,11 +7,13 @@ import { FaNoteSticky } from "react-icons/fa6";
 import { FaStar } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { FaUserCircle } from "react-icons/fa";
+import { FaChevronDown } from "react-icons/fa";
 import Spinner from "../Spinner";
 
 const Header = () => {
   const { user, loading } = useContext(UserContext);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isOpenSection, setIsOpenSection] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -89,7 +91,53 @@ const Header = () => {
               </span>
             </button>
           </Link>
-          <Link
+
+          <button
+            id="dropdown-button"
+            className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center"
+            onClick={() => setIsOpenSection(!isOpenSection)}
+          >
+            <FaRobot className="self-start" size={20} />
+            <span className="self-center flex-grow text-center px-3">
+              Симуляції
+            </span>
+            <FaChevronDown
+              className={`self-end transition-transform duration-300 ${
+                isOpenSection ? "rotate-180" : ""
+              }`}
+              size={20}
+            />
+          </button>
+
+          <div
+            id="dropdown-list"
+            className={`dropdown-list text-center ${
+              isOpenSection ? "block" : "hidden"
+            }`}
+            style={{ maxHeight: "100px", overflowY: "scroll", width: "100%" }}
+          >
+            <ul className="list-reset">
+              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
+                <Link
+                  onClick={toggleMenu}
+                  to="/simulations"
+                  style={{ textDecoration: "none", width: "100%" }}
+                >
+                  Скейт парк
+                </Link>
+              </li>
+              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
+                Item 2
+              </li>
+              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
+                Item 3
+              </li>
+              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
+                Item 4
+              </li>
+            </ul>
+          </div>
+          {/* <Link
             to={"/simulations"}
             style={{ textDecoration: "none", width: "100%" }}
           >
@@ -102,7 +150,7 @@ const Header = () => {
                 Симуляції
               </span>
             </button>
-          </Link>
+          </Link> */}
           <Link to={"/tests"} style={{ textDecoration: "none", width: "100%" }}>
             <button
               onClick={toggleMenu}
