@@ -26,6 +26,10 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
   };
 
   useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [page, currentPage]);
+
+  useEffect(() => {
     if (pagesCount + 1 <= currentPage || currentPage <= 0) goToFirstPage();
 
     window.history.pushState(null, "", currentPage);
