@@ -5,7 +5,6 @@ import Login from "./pages/Login";
 import EmailVerify from "./pages/EmailVerify";
 import ForgotPassword from "./pages/ForgotPassword";
 import PasswordReset from "./pages/PasswordReset";
-//import Section from "./components/Section";
 import Header from "./components/Header";
 import Theme from "./pages/Theme";
 import Page404 from "./pages/404";
@@ -31,8 +30,7 @@ function App() {
           {user && <Route path="/tests/:theme" exact element={<Testing />} />}
           {user && <Route path="/favorite" exact element={<FavoriteItems/>} />}
           {user && <Route path="/sections/:section/materials/:page" exact element={<FavoriteMaterials/>} />}
-          {user && <Route path="/simulations" exact element={<Simulations/>} />}
-          {/* {user && <Route path="/sections/:section" exact element={<Section />} />} */}
+          {user && <Route path="/simulations/:name" exact element={<Simulations/>} />}
           <Route path="/signup" exact element={<Signup />} />
           <Route path="/login" exact element={<Login />} />
           <Route path="/" exact element={<Navigate replace to="/login" />} />

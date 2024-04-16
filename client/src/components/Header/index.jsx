@@ -37,6 +37,19 @@ const Header = () => {
     setMenuOpen((prevMenuOpen) => !prevMenuOpen);
   };
 
+  const simulations = [
+    { link: "gasProperties", name: "Властивості газу" },
+    { link: "density", name: "Густина" },
+    { link: "electricCircuit", name: "Електричне коло" },
+    { link: "faradaysLaw", name: "Закон Фарадея" },
+    { link: "optics", name: "Оптика" },
+    { link: "buildNucleus", name: "Побудувати ядро" },
+    { link: "rutherfordScattering", name: "Розсіювання Резерфорда" },
+    { link: "skatesPark", name: "Скейт парк" },
+    { link: "energyFormsAndChanges", name: "Форми енергії та їх зміни" },
+    { link: "wawes", name: "Хвилі" },
+  ];
+
   return (
     <header className="bg-primary p-4 fixed top-0 w-full z-10 flex justify-between items-center shadow-md">
       <div className="flex flex-start">
@@ -114,43 +127,26 @@ const Header = () => {
             className={`dropdown-list text-center ${
               isOpenSection ? "block" : "hidden"
             }`}
-            style={{ maxHeight: "100px", overflowY: "scroll", width: "100%" }}
+            style={{ maxHeight: "190px", overflowY: "scroll", width: "100%" }}
           >
             <ul className="list-reset">
-              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
-                <Link
-                  onClick={toggleMenu}
-                  to="/simulations"
-                  style={{ textDecoration: "none", width: "100%" }}
+              {simulations.map((simulation, index) => (
+                <li
+                  key={index}
+                  className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent"
                 >
-                  Скейт парк
-                </Link>
-              </li>
-              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
-                Item 2
-              </li>
-              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
-                Item 3
-              </li>
-              <li className="p-2 my-1 bg-secondary rounded-xl text-black hover:bg-gradient-to-r from-primary to-transparent">
-                Item 4
-              </li>
+                  <Link
+                    onClick={toggleMenu}
+                    to={`/simulations/${simulation.link}`}
+                    style={{ textDecoration: "none", width: "100%" }}
+                  >
+                    {simulation.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
-          {/* <Link
-            to={"/simulations"}
-            style={{ textDecoration: "none", width: "100%" }}
-          >
-            <button
-              onClick={toggleMenu}
-              className="bg-primary text-white px-4 py-2 rounded w-full hover:bg-secondary hover:text-primary flex justify-between items-center"
-            >
-              <FaRobot className="self-start" size={20} />
-              <span className="self-center flex-grow text-center px-3">
-                Симуляції
-              </span>
-            </button>
-          </Link> */}
+
           <Link to={"/tests"} style={{ textDecoration: "none", width: "100%" }}>
             <button
               onClick={toggleMenu}
@@ -162,6 +158,7 @@ const Header = () => {
               </span>
             </button>
           </Link>
+
           <Link
             to={"/favorite"}
             style={{ textDecoration: "none", width: "100%" }}
