@@ -1,10 +1,12 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import usePhysixService from "../../services/PhysixService";
+import { UserContext } from "../UserContext";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import Spinner from "../Spinner";
 import ErrorMessage from "../ErrorMessage";
+import CommentList from "../CommentList";
 
 const Game = ({
   question,
@@ -25,9 +27,59 @@ const Game = ({
     addFavoriteTest,
     removeFavoriteTest,
     getFavoriteTestIDS,
+    addComment,
+    getComments,
   } = usePhysixService();
+  const { user } = useContext(UserContext);
 
   const [favoriteTests, setFavoriteTests] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  const handleNewCommentChange = (e) => {
+    const value = e.target.value;
+    const words = value.split(" ");
+    const formattedWords = words.filter((word) => word.trim() !== " ");
+    const formattedValue = formattedWords.join(" ");
+    setNewComment(formattedValue);
+  };
+
+  const handleAddComment = async (event) => {
+    event.preventDefault();
+    try {
+      const newCommentObj = {
+        text: newComment,
+        username: `${user.firstName} ${user.lastName}`,
+        createdAt: new Date(),
+      };
+      await addComment(
+        newCommentObj.username,
+        question._id,
+        newCommentObj.text
+      );
+      setNewComment("");
+      handleGetComments();
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
+
+  const handleGetComments = useCallback(async () => {
+    try {
+      const res = await getComments(question._id);
+      setComments(res);
+    } catch (error) {
+      console.error("Error fetching comments:", error);
+    }
+  }, [question._id]);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleGetComments();
+    }, 20000);
+    handleGetComments();
+    return () => clearInterval(interval);
+  }, [handleGetComments]);
 
   const getFavorite = useCallback(async () => {
     try {
@@ -152,8 +204,37 @@ const Game = ({
               : "bg-primary hover:bg-secondary hover:text-primary cursor-pointer"
           }`}
         >
-          Наступне запитання
+          {step === length ? "Завершити" : "Наступне"}
         </button>
+      </div>
+      <div className="items-center mx-auto w-full sm:w-2/3 md:w-3/4 lg:w-full xl:w-2/3 2xl:w-3/4">
+        <h4 className="text-xl sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl 2xl:text-5xl font-semibold mx-auto mt-4 text-center">
+          Потрібна допомога? Запитай у інших!
+        </h4>
+        <div className="flex justify-center mt-4">
+          <textarea
+            className="w-2/3 sm:w-2/3 md:w-2/3 lg:w-2/3 xl:w-2/3 2xl:w-2/3 h-12 sm:h-16 md:h-18 lg:h-18 xl:h-20 2xl:h-25 bg-white border-2 border-primary rounded py-2 px-4 mx-2"
+            placeholder="Опиши проблему"
+            value={newComment}
+            onChange={handleNewCommentChange}
+          ></textarea>
+        </div>
+        <div className="flex justify-center mt-4">
+          <button
+            className={`${
+              newComment.length < 2
+                ? "bg-gray-300 cursor-not-allowed"
+                : "bg-primary"
+            } text-white font-semibold px-4 py-2 rounded mb-2`}
+            onClick={handleAddComment}
+            disabled={newComment.length < 2}
+          >
+            Додати
+          </button>
+        </div>
+      </div>
+      <div className="flex flex-col items-center w-full mb-4">
+        <CommentList comments={comments} />
       </div>
     </>
   );

@@ -148,6 +148,24 @@ const usePhysixService = () => {
     [request]
   );
 
+  const addComment = useCallback(
+    async (username, testId, text) => {
+      return await request(
+        `comments`,
+        "POST",
+        JSON.stringify({ username, testId, text })
+      );
+    },
+    [request]
+  );
+
+  const getComments = useCallback(
+    async (testId) => {
+      return await request(`comments?testId=${testId}`, "GET", null);
+    },
+    [request]
+  );
+
   return {
     loading,
     error,
@@ -163,7 +181,9 @@ const usePhysixService = () => {
     addFavoriteArticle,
     removeFavoriteArticle,
     getFavoriteArticlesIDS,
-    getFavoriteItems
+    getFavoriteItems,
+    addComment,
+    getComments,
   };
 };
 
