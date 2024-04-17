@@ -204,7 +204,7 @@ const Game = ({
               : "bg-primary hover:bg-secondary hover:text-primary cursor-pointer"
           }`}
         >
-          {step === length ? "Завершити" : "Наступне"}
+          {step + 1 === length ? "Завершити" : "Наступне"}
         </button>
       </div>
       <div className="items-center mx-auto w-full sm:w-2/3 md:w-3/4 lg:w-full xl:w-2/3 2xl:w-3/4">
