@@ -9,6 +9,7 @@ const passwordResetRoutes = require("./routes/passwordReset");
 const sectionsRoutes = require("./routes/sections");
 const testsRoutes = require("./routes/tests");
 const testExplanation = require("./routes/testExplanation");
+const commentsRoutes = require("./routes/comments");
 
 // DB connection
 connection();
@@ -24,6 +25,7 @@ app.use("/api/password-reset", passwordResetRoutes);
 app.use("/api/sections", sectionsRoutes);
 app.use("/api/tests", testsRoutes);
 app.use("/api/test-explanation", testExplanation);
+app.use("/api/comments", commentsRoutes);
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
