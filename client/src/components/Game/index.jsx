@@ -71,6 +71,7 @@ const Game = ({
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
+    // eslint-disable-next-line
   }, [question._id]);
 
   useEffect(() => {
@@ -88,6 +89,7 @@ const Game = ({
     } catch (error) {
       console.error("Error fetching favorite tests:", error);
     }
+    // eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {

@@ -26,6 +26,7 @@ export const useHttp = () => {
       setError(error.message);
       throw error;
     }
+    // eslint-disable-next-line
   },[]);
 
   return { loading, error, clearError, request };
