@@ -14,7 +14,7 @@ import TestThemes from "./pages/TestThemes";
 import Testing from "./pages/Testing";
 import FavoriteItems from "./pages/FavoriteItems";
 import FavoriteMaterials from "./pages/FavoriteMaterials";
-import Simulations from "./components/Simulations";
+import Simulations from "./pages/Simulations";
 
 function App() {
   const user = localStorage.getItem("token");

@@ -8,6 +8,7 @@ import { SectionContext } from "../../components/SectionContext";
 import usePhysixService from "../../services/PhysixService";
 import { UserContext } from "../../components/UserContext";
 import { MdSignalWifiConnectedNoInternet4 } from "react-icons/md";
+import { Helmet } from "react-helmet";
 
 const Main = () => {
   const { user } = useContext(UserContext);
@@ -231,11 +232,21 @@ const Main = () => {
   const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
-    <div className="min-h-[91vh] flex flex-col justify-center items-center bg-secondary">
-      {errorMessage}
-      {spinner}
-      {content}
-    </div>
+    <>
+      <Helmet>
+        <title>PhysiX - Додаток для вивчення фізики</title>
+        <meta
+          name="description"
+          content="Додаток для вивчення фізики: тести, матеріали та симуляції для ефективної підготовки до ЗНО та НМТ з фізики. Поглибіть свої знання фізики та готуйтесь до іспитів з нашим додатком."
+        />
+      </Helmet>
+
+      <div className="min-h-[91vh] flex flex-col justify-center items-center bg-secondary">
+        {errorMessage}
+        {spinner}
+        {content}
+      </div>
+    </>
   );
 };
 

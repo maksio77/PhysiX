@@ -168,12 +168,12 @@ const Game = ({
           const className = `p-4 bg-white rounded-md shadow cursor-pointer ${
             isSelected
               ? isCorrect
-                ? "bg-green-300"
-                : "bg-red-300"
+                ? "bg-emerald-300"
+                : "bg-rose-300"
               : selectedAnswer !== null
               ? "opacity-50 cursor-not-allowed"
               : "hover:text-primary hover:bg-secondary"
-          } ${isCorrect && selectedAnswer !== null ? "bg-green-300" : ""}`;
+          } ${isCorrect && selectedAnswer !== null ? "bg-emerald-300" : ""}`;
           return (
             <li
               onClick={() => {

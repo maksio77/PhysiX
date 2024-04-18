@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { TestContext } from "../../components/TestContext";
 import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
+import { Helmet } from "react-helmet";
 
 export default function TestThemes() {
   const { tests, error, loading } = useContext(TestContext);
@@ -92,10 +93,20 @@ export default function TestThemes() {
   const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
-    <div className="flex min-h-[91vh] flex-col justify-center items-center bg-secondary">
-      {errorMessage}
-      {spinner}
-      {content}
-    </div>
+    <>
+      <Helmet>
+        <title>Тести - Додаток для вивчення фізики</title>
+        <meta
+          name="description"
+          content="Пройдіть тести з фізики в додатку для ефективної підготовки до ЗНО та НМТ. Перевірте свої знання та готуйтесь до іспитів з нашим додатком. Залишайте запитання та отримуйте відповіді від інших користувачів."
+        />
+      </Helmet>
+
+      <div className="flex min-h-[91vh] flex-col justify-center items-center bg-secondary">
+        {errorMessage}
+        {spinner}
+        {content}
+      </div>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import usePhysixService from "../../services/PhysixService";
 import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
+import { Helmet } from "react-helmet";
 
 const FavoriteItems = () => {
   const token = localStorage.getItem("token");
@@ -108,11 +109,21 @@ const FavoriteItems = () => {
   const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
-    <div className="min-h-[91vh] flex flex-col justify-center items-center bg-secondary">
-      {errorMessage}
-      {spinner}
-      {content}
-    </div>
+    <>
+      <Helmet>
+        <title>Обрані матеріали - Додаток для вивчення фізики</title>
+        <meta
+          name="description"
+          content="Зберігайте обрані тести та матеріали для подальшого використання. Використовуйте наш додаток для ефективної підготовки до ЗНО та НМТ з фізики."
+        />
+      </Helmet>
+
+      <div className="min-h-[91vh] flex flex-col justify-center items-center bg-secondary">
+        {errorMessage}
+        {spinner}
+        {content}
+      </div>
+    </>
   );
 };
 

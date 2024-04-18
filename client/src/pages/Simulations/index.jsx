@@ -1,6 +1,6 @@
 import { useEffect, useRef, forwardRef } from "react";
 import { useParams } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 import { reforwardRef, setOptions } from "./utils.js";
 
 function ChartComponent(props, ref) {
@@ -102,25 +102,35 @@ function ChartComponent(props, ref) {
   )?.link;
 
   return (
-    <div className="min-h-[91vh] flex flex-col justify-center items-center bg-black">
-      <canvas
-        ref={canvasRef}
-        role="img"
-        height={height}
-        width={width}
-        {...canvasProps}
-        className="canvas"
-      >
-        {fallbackContent}
-      </canvas>
-      <iframe
-        src={simulationLink}
-        className="w-full lg:h-[40rem] xl:h-[68rem] sm: h-[20rem]"
-        allowFullScreen
-        allow="autoplay"
-        title="simulation"
-      ></iframe>
-    </div>
+    <>
+      <Helmet>
+        <title>Симуляції - Додаток для вивчення фізики</title>
+        <meta
+          name="description"
+          content="Використовуйте симуляції з фізики для ефективного вивчення та підготовки до ЗНО та НМТ. Поглиблюйте свої знання та готуйтесь до іспитів з нашим додатком. Залишайте коментарі та отримуйте відповіді від інших користувачів."
+        />
+      </Helmet>
+
+      <div className="min-h-[91vh] flex flex-col justify-center items-center bg-black">
+        <canvas
+          ref={canvasRef}
+          role="img"
+          height={height}
+          width={width}
+          {...canvasProps}
+          className="canvas"
+        >
+          {fallbackContent}
+        </canvas>
+        <iframe
+          src={simulationLink}
+          className="w-full lg:h-[40rem] xl:h-[68rem] sm: h-[20rem]"
+          allowFullScreen
+          allow="autoplay"
+          title="simulation"
+        ></iframe>
+      </div>
+    </>
   );
 }
 

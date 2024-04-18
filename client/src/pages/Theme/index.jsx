@@ -6,6 +6,7 @@ import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
 import SearchInput from "../../components/SearchInput";
 import { GrLinkNext } from "react-icons/gr";
+import { Helmet } from "react-helmet";
 
 const Theme = () => {
   const { sections, error, loading } = useContext(SectionContext);
@@ -112,11 +113,21 @@ const Theme = () => {
   const spinner = loading ? <Spinner loading={loading} /> : null;
 
   return (
-    <div className="min-h-[91vh] flex mx-auto flex-col justify-center items-center bg-secondary">
-      {errorMessage}
-      {spinner}
-      {content}
-    </div>
+    <>
+      <Helmet>
+        <title>Матеріали - Додаток для вивчення фізики</title>
+        <meta
+          name="description"
+          content="Знайдіть корисні матеріали для вивчення фізики: тести, посібники та інші ресурси для ефективної підготовки до ЗНО та НМТ."
+        />
+      </Helmet>
+
+      <div className="min-h-[91vh] flex mx-auto flex-col justify-center items-center bg-secondary">
+        {errorMessage}
+        {spinner}
+        {content}
+      </div>
+    </>
   );
 };
 
