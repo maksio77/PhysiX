@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import { TfiMenu } from "react-icons/tfi";
 import { FaRobot } from "react-icons/fa6";
 import { FaNoteSticky } from "react-icons/fa6";

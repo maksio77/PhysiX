@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import usePhysixService from "../../services/PhysixService";
-import { UserContext } from "../UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import { FaRegStar } from "react-icons/fa";
 import { FaStar } from "react-icons/fa";
 import Spinner from "../Spinner";

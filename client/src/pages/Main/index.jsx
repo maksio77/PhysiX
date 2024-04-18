@@ -4,9 +4,9 @@ import SearchInput from "../../components/SearchInput";
 import ErrorMessage from "../../components/ErrorMessage";
 import Spinner from "../../components/Spinner";
 import { searchInputText } from "../../utils/searchInputText";
-import { SectionContext } from "../../components/SectionContext";
+import { SectionContext } from "../../contexts/SectionContext";
 import usePhysixService from "../../services/PhysixService";
-import { UserContext } from "../../components/UserContext";
+import { UserContext } from "../../contexts/UserContext";
 import { MdSignalWifiConnectedNoInternet4 } from "react-icons/md";
 import { Helmet } from "react-helmet";
 
