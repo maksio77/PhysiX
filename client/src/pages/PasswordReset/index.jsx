@@ -10,7 +10,7 @@ const PasswordReset = () => {
   const [error, setError] = useState("");
 
   const param = useParams();
-  const url = `http://localhost:4000/api/password-reset/${param.id}/${param.token}`;
+  const url = `https://physix-production-9a73.up.railway.app/api/password-reset/${param.id}/${param.token}`;
 
   useEffect(() => {
     const verifyUrl = async () => {
