@@ -27,7 +27,7 @@ const Signup = () => {
     setError("");
     setLoading(true);
     try {
-      const url = "http://localhost:4000/api/users";
+      const url = "https://physix-production-9a73.up.railway.app/api/users";
       const { data: res } = await axios.post(url, data);
       setMsg(res.message);
       setData({
