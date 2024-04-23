@@ -21,7 +21,6 @@ const Game = ({
 }) => {
   const token = localStorage.getItem("token");
   const {
-    loading,
     clearError,
     error,
     addFavoriteTest,
@@ -35,6 +34,8 @@ const Game = ({
   const [favoriteTests, setFavoriteTests] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [comments, setComments] = useState([]);
+  const [isLoadingComment, setIsLoading] = useState(false);
+  const [isLoadingFav, setIsLoadingFav] = useState(false);
 
   const handleNewCommentChange = (e) => {
     const value = e.target.value;
@@ -45,6 +46,7 @@ const Game = ({
   };
 
   const handleAddComment = async (event) => {
+    setIsLoading(true);
     event.preventDefault();
     try {
       const newCommentObj = {
@@ -61,6 +63,8 @@ const Game = ({
       handleGetComments();
     } catch (error) {
       console.error("Error adding comment:", error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -76,17 +80,20 @@ const Game = ({
   useEffect(() => {
     const interval = setInterval(() => {
       handleGetComments();
-    }, 20000);
+    }, 30000);
     handleGetComments();
     return () => clearInterval(interval);
   }, [handleGetComments]);
 
   const getFavorite = useCallback(async () => {
+    setIsLoadingFav(true);
     try {
       const res = await getFavoriteTestIDS(token);
       setFavoriteTests(res);
     } catch (error) {
       console.error("Error fetching favorite tests:", error);
+    } finally {
+      setIsLoadingFav(false);
     }
   }, [token]);
 
@@ -95,25 +102,36 @@ const Game = ({
   }, [getFavorite]);
 
   const handleAddFavorite = async () => {
+    setIsLoadingFav(true);
     try {
       await addFavoriteTest(question, token);
       getFavorite();
     } catch (error) {
       console.error("Error adding favorite test:", error);
+    } finally {
+      setIsLoadingFav(false);
     }
   };
 
   const handleRemoveFavorite = async () => {
+    setIsLoadingFav(true);
     try {
       await removeFavoriteTest(question._id, token);
       getFavorite();
     } catch (error) {
       console.error("Error removing favorite test:", error);
+    } finally {
+      setIsLoadingFav(false);
     }
   };
 
   const errorMessage = error ? <ErrorMessage message={error} /> : null;
-  const spinner = loading ? <Spinner size={20} loading={loading} /> : null;
+  const spinnerFav = isLoadingFav ? (
+    <Spinner size={20} loading={isLoadingFav} />
+  ) : null;
+  const spinnerCom = isLoadingComment ? (
+    <Spinner size={20} loading={isLoadingComment} />
+  ) : null;
   const star = favoriteTests.includes(question._id) ? (
     <FaStar onClick={handleRemoveFavorite} size={20} />
   ) : (
@@ -121,6 +139,7 @@ const Game = ({
   );
 
   const percentage = Math.round((step / length) * 100);
+  //  Запитання ${step + 1} із ${length}
 
   return (
     <>
@@ -144,10 +163,16 @@ const Game = ({
           {backRoute.routeText}
         </Link>
 
+        <div className="mt-4 flex items-center justify-center h-16">
+          <h2 className="text-center sm:text-sm lg:text-xl font-bold mx-4 sm:mx-4 md:mx-8 lg:mx-16 xl:mx-32 2xl:mx-64 mb-2">
+            {`Запитання ${step + 1} із ${length}`}
+          </h2>
+        </div>
+
         <button className="mt-4 bg-white shadow hover:bg-secondary hover:text-primary transition-all duration-200 ease-in-out text-primary sm:text-base p-2 text-right rounded-md mb-4">
-          {!errorMessage && !loading ? star : null}
+          {!errorMessage && !spinnerFav ? star : null}
           {errorMessage}
-          {spinner}
+          {spinnerFav}
         </button>
       </div>
       {question.image && (
@@ -168,12 +193,16 @@ const Game = ({
           const className = `p-4 bg-white rounded-md shadow cursor-pointer ${
             isSelected
               ? isCorrect
-                ? "bg-emerald-300"
-                : "bg-rose-300"
+                ? "border-4 border-emerald-300 bg-emerald-400"
+                : "border-4 border-rose-300 bg-rose-400"
               : selectedAnswer !== null
               ? "opacity-50 cursor-not-allowed"
               : "hover:text-primary hover:bg-secondary"
-          } ${isCorrect && selectedAnswer !== null ? "bg-emerald-300" : ""}`;
+          } ${
+            isCorrect && selectedAnswer !== null
+              ? "border-4 border-emerald-300 bg-emerald-400"
+              : ""
+          }`;
           return (
             <li
               onClick={() => {
@@ -229,7 +258,7 @@ const Game = ({
             onClick={handleAddComment}
             disabled={newComment.length < 2}
           >
-            Додати
+            {isLoadingComment ? spinnerCom : "Додати"}
           </button>
         </div>
       </div>
