@@ -25,6 +25,7 @@ function Testing() {
   const onNext = () => {
     setSelectedAnswer(null);
     setStep(step + 1);
+    window.scrollTo(0, 0);
   };
 
   const onClickVariant = (index) => {

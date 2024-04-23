@@ -12,7 +12,7 @@ const EmailVerify = () => {
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
-        const url = `https://physix-production-9a73.up.railway.app/api/users/${param.id}/verify/${param.token}`;
+        const url = `${process.env.REACT_APP_API_BASE_URL}/api/users/${param.id}/verify/${param.token}`;
         const { data } = await axios.get(url);
         console.log(data);
         setValidUrl(true);

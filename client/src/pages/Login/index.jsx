@@ -24,7 +24,7 @@ const Login = () => {
     setLoading(true);
     setError("");
     try {
-      const url = "https://physix-production-9a73.up.railway.app/api/auth";
+      const url = `${process.env.REACT_APP_API_BASE_URL}/api/auth`;
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       window.location = "/";

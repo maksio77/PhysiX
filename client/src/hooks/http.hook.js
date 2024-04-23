@@ -9,7 +9,7 @@ export const useHttp = () => {
   const request = useCallback( async (type, method = 'GET', body = null, headers = {'Content-Type': 'application/json'}) => {
     setLoading(true);
     try {
-      const url = `https://physix-production-9a73.up.railway.app/api/${type}`;
+      const url = `${process.env.REACT_APP_API_BASE_URL}/api/${type}`;
       const response = (await fetch(url, {method,body,headers}));
 
       if(!response.ok){

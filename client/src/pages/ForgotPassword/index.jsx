@@ -13,7 +13,7 @@ const ForgotPassword = () => {
     setLoading(true);
     setError("");
     try {
-      const url = `https://physix-production-9a73.up.railway.app/api/password-reset`;
+      const url = `${process.env.REACT_APP_API_BASE_URL}/api/password-reset`;
       const { data } = await axios.post(url, { email });
       setMsg(data.message);
       setError("");
