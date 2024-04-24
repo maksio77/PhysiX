@@ -1,6 +1,6 @@
 import img from "./error.gif";
 
-const ErrorMassage = ({message}) => {
+const ErrorMassage = ({ message }) => {
   return (
     <>
       <img
@@ -12,10 +12,10 @@ const ErrorMassage = ({message}) => {
           margin: "0 auto",
         }}
         src={img}
-        alt=''
+        alt="Error Message"
         Error
       />
-      {message}
+      <p className="text-red-500">{message}</p>
     </>
   );
 };
