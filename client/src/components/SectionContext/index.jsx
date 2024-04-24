@@ -18,6 +18,7 @@ const SectionProvider = (props) => {
         }
       });
     }
+    // eslint-disable-next-line
   }, []);
 
   return (

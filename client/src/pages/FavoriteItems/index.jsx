@@ -18,6 +18,7 @@ const FavoriteItems = () => {
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {
@@ -41,7 +42,7 @@ const FavoriteItems = () => {
             <div
               className={`p-4 ${
                 items.favoriteTests.length === 0
-                  ? "opacity-50 cursor-not-allowed"
+                  ? "opacity-50 cursor-not-allowed pointer-events-none"
                   : ""
               }`}
               title={items.favoriteTests.length === 0 ? "ТЕСТИ ВІДСУТНІ" : ""}
@@ -61,7 +62,7 @@ const FavoriteItems = () => {
                   textDecoration: "none",
                 }}
                 className={`sm:ml-10 ${
-                  items.favoriteTests.length === 0 ? "pointer-events-none" : ""
+                  items.favoriteTests.length === 0 ? "cursor-not-allowed pointer-events-none" : ""
                 }`}
               >
                 <h3 className="text-lg font-semibold hover:text-primary w-full">
@@ -74,7 +75,7 @@ const FavoriteItems = () => {
             <div
               className={`p-4 ${
                 items.favoriteArticles.length === 0
-                  ? "opacity-50 cursor-not-allowed"
+                  ? "opacity-50 cursor-not-allowed pointer-events-none"
                   : ""
               }`}
               title={
@@ -90,7 +91,7 @@ const FavoriteItems = () => {
                 }}
                 className={`sm:ml-10 ${
                   items.favoriteArticles.length === 0
-                    ? "pointer-events-none"
+                    ? "cursor-not-allowed pointer-events-none"
                     : ""
                 }`}
               >

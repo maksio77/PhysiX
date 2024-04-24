@@ -43,6 +43,7 @@ const Main = () => {
     } catch (error) {
       console.error("Error fetching favorite tests:", error);
     }
+    // eslint-disable-next-line
   }, [isOnline]);
 
   useEffect(() => {

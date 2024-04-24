@@ -35,6 +35,7 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
     window.history.pushState(null, "", currentPage);
 
     if (inputText && theme.info.length <= 6) goToFirstPage();
+    // eslint-disable-next-line
   }, [currentPage, inputText]);
 
   useEffect(() => {
@@ -54,6 +55,7 @@ const PaginatedGrid = ({ theme, searchPhrase, inputText }) => {
     } catch (error) {
       console.error("Error fetching favorite tests:", error);
     }
+    // eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {

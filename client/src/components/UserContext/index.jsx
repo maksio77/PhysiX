@@ -15,6 +15,7 @@ const UserProvider = (props) => {
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
+    // eslint-disable-next-line
   }, []);
 
   useEffect(() => {

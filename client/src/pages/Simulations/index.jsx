@@ -45,12 +45,14 @@ function ChartComponent(props, ref) {
 
     destroyChart();
     setTimeout(renderChart);
+    // eslint-disable-next-line
   }, [type]);
 
   useEffect(() => {
     renderChart();
 
     return () => destroyChart();
+    // eslint-disable-next-line
   }, []);
 
   let { name } = useParams();

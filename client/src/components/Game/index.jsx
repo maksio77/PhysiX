@@ -75,6 +75,7 @@ const Game = ({
     } catch (error) {
       console.error("Error fetching comments:", error);
     }
+    // eslint-disable-next-line
   }, [question._id]);
 
   useEffect(() => {
@@ -95,6 +96,7 @@ const Game = ({
     } finally {
       setIsLoadingFav(false);
     }
+    // eslint-disable-next-line
   }, [token]);
 
   useEffect(() => {
@@ -139,7 +141,6 @@ const Game = ({
   );
 
   const percentage = Math.round((step / length) * 100);
-  //  Запитання ${step + 1} із ${length}
 
   return (
     <>
@@ -193,14 +194,14 @@ const Game = ({
           const className = `p-4 bg-white rounded-md shadow cursor-pointer ${
             isSelected
               ? isCorrect
-                ? "border-4 border-emerald-300 bg-emerald-400"
-                : "border-4 border-rose-300 bg-rose-400"
+                ? "border-4 border-emerald-300 bg-emerald-200"
+                : "border-4 border-rose-300 bg-rose-200"
               : selectedAnswer !== null
               ? "opacity-50 cursor-not-allowed"
               : "hover:text-primary hover:bg-secondary"
           } ${
             isCorrect && selectedAnswer !== null
-              ? "border-4 border-emerald-300 bg-emerald-400"
+              ? "border-4 border-emerald-300 bg-emerald-200"
               : ""
           }`;
           return (
